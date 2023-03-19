@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Echolalia.Data
 {
 
-	class LibraryDB
+	public class LibraryDB
 	{
 		readonly SQLiteAsyncConnection db;
 
