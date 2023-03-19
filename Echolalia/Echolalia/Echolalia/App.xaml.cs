@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using Echolalia.Data;
+using Echolalia.Views;
 
 namespace Echolalia
 {
@@ -29,7 +30,7 @@ namespace Echolalia
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new HomePage();
         }
 
         protected override void OnStart ()

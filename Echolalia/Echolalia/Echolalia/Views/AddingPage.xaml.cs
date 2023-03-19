@@ -6,11 +6,16 @@ using Xamarin.Forms;
 namespace Echolalia.Views
 {	
 	public partial class AddingPage : ContentPage
-	{	
-		public AddingPage ()
-		{
-			InitializeComponent ();
-		}
-	}
+	{
+        ToolbarItem item = new ToolbarItem
+        {
+            Text = "Example Item",
+            IconImageSource = ImageSource.FromFile("example_icon.png"),
+            Order = ToolbarItemOrder.Primary,
+            Priority = 0
+        };
+
+        
+    }
 }
 

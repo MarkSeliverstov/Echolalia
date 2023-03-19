@@ -3,7 +3,7 @@ using SQLite;
 
 namespace Echolalia.Models
 {
-	public public class Translation
+	public class Translation
 	{
 		[PrimaryKey, AutoIncrement]
 		public int ID { get; set; }

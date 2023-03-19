@@ -19,10 +19,22 @@
     <None Remove="Models\" />
     <None Remove="Data\" />
     <None Remove="Views\" />
+    <None Remove="ViewModel\" />
+    <None Remove="Fonts\" />
+    <None Remove="Fonts\Exo-Bold.ttf" />
+    <None Remove="Fonts\Exo-Medium.ttf" />
+    <None Remove="Fonts\Exo-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Data\" />
     <Folder Include="Views\" />
+    <Folder Include="ViewModel\" />
+    <Folder Include="Fonts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Fonts\Exo-Bold.ttf" />
+    <EmbeddedResource Include="Fonts\Exo-Medium.ttf" />
+    <EmbeddedResource Include="Fonts\Exo-Regular.ttf" />
   </ItemGroup>
 </Project>

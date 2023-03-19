@@ -3,8 +3,59 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Echolalia.Views.HomePage">
-    <ContentPage.Content>
-        
-    </ContentPage.Content>
+
+    <StackLayout>
+        <StackLayout Orientation="Horizontal"
+                     BackgroundColor="#5B5F97"
+                     VerticalOptions="StartAndExpand">
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="30,40, 30, 5"/>
+                    <On Platform="Android, UWP" Value="30,0, 30, 5"/>
+                </OnPlatform>
+            </StackLayout.Padding>
+            <Image Source="IconSettings.png"
+                   HorizontalOptions="StartAndExpand"
+                   Scale="0.9"
+                   Margin="0, 20, 0, 0"/>
+            <Label Text="Echolalia"
+                    TextColor="White"
+                    FontFamily="Exo-Bold"
+                    FontSize="25"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    Margin="0, 20, 0, 0"/>
+            <Image Source="IconStats.png"
+                   HorizontalOptions="EndAndExpand"
+                   Scale="0.8"
+                   Margin="0,20, 0, 0"/>
+        </StackLayout>
+
+        <StackLayout VerticalOptions="Center">
+        </StackLayout>
+
+        <Frame VerticalOptions="EndAndExpand"
+               Padding="0, 0, 0, 0"
+               Margin="0, 0, 0, -60"
+               CornerRadius="60"
+               BackgroundColor="#5B5F97">
+            <StackLayout Orientation="Horizontal"
+                     VerticalOptions="StartAndExpand"
+                     Padding="60, 10, 60, 45"
+                     >
+            <Image Source="IconHomeActive.png"
+                   HorizontalOptions="StartAndExpand"
+                   Margin="5, 0, 0, 20"/>
+            <Image Source="IconAdd.png"
+                   HorizontalOptions="StartAndExpand"
+                   Margin="50, 0, 0, 20"/>
+            <Image Source="IconLibrary.png"
+                   HorizontalOptions="EndAndExpand"
+                   Scale="0.9"
+                   Margin="0, 0, 0, 20"/>
+        </StackLayout>
+
+        </Frame>
+    </StackLayout>
 </ContentPage>
 

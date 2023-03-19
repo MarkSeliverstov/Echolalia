@@ -136,4 +136,14 @@
       <Name>Echolalia</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\IconAdd.png" />
+    <BundleResource Include="Resources\IconAddActive.png" />
+    <BundleResource Include="Resources\IconHome.png" />
+    <BundleResource Include="Resources\IconHomeActive.png" />
+    <BundleResource Include="Resources\IconLibrary.png" />
+    <BundleResource Include="Resources\IconLibraryActive.png" />
+    <BundleResource Include="Resources\IconSettings.png" />
+    <BundleResource Include="Resources\IconStats.png" />
+  </ItemGroup>
 </Project>
