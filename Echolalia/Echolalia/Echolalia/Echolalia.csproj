@@ -24,6 +24,7 @@
     <None Remove="Fonts\Exo-Bold.ttf" />
     <None Remove="Fonts\Exo-Medium.ttf" />
     <None Remove="Fonts\Exo-Regular.ttf" />
+    <None Remove="CustomControls\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -31,6 +32,7 @@
     <Folder Include="Views\" />
     <Folder Include="ViewModel\" />
     <Folder Include="Fonts\" />
+    <Folder Include="CustomControls\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Fonts\Exo-Bold.ttf" />
