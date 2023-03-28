@@ -9,9 +9,9 @@
         <local:TopBarControl/>
 
         <StackLayout VerticalOptions="Center">
+            <Label Text="HomePage"/>
         </StackLayout>
 
-        <local:DownBarControl/>
     </StackLayout>
 </ContentPage>
 

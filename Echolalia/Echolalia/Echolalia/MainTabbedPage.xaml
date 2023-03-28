@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local1="clr-namespace:Echolalia.Views"
+             x:Class="Echolalia.MainTabbedPage"
+             NavigationPage.HasNavigationBar="False"
+             BarBackgroundColor="#5B5F97"
+             SelectedTabColor="White"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             android:TabbedPage.ToolbarPlacement="Bottom"
+             ios:TabbedPage.TranslucencyMode="Opaque"
+             xmlns:ffsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             >
+             
+  <!--Pages can be added as references or inline-->
+    <local1:HomePage IconImageSource="VectorHome.svg"/>
+    <local1:AddingPage IconImageSource="VectorHome.svg"/>
+    <local1:LibraryPage IconImageSource="IconLibrary.png"/>
+</TabbedPage>
