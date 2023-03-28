@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using Echolalia.Views;
 
 namespace Echolalia
 {
@@ -19,32 +20,48 @@ namespace Echolalia
 				Padding = new Thickness(60, 10, 60, 45)
 			};
 
-			stack.Children.Add(new Image
-			{
-				Source = "IconHomeActive.png",
-				HorizontalOptions = LayoutOptions.StartAndExpand,
-				Margin = new Thickness(5, 0, 0, 20),
-				Scale = 0.9
-			});
+			var homeBtn = CreateIBtn("IconHomeActive.png");
+			homeBtn.Clicked += OnHomeButtonClicked;
 
-			stack.Children.Add(new Image
-			{
-				Source = "IconAdd.png",
-				HorizontalOptions = LayoutOptions.StartAndExpand,
-				Margin = new Thickness(40, 0, 0, 20),
-				Scale = 0.9
-			});
+			var addBtn = CreateIBtn("IconAdd.png");
+			addBtn.Clicked += OnAddButtonClicked;
 
-			stack.Children.Add(new Image
-			{
-				Source = "IconLibrary.png",
-				HorizontalOptions = LayoutOptions.EndAndExpand,
-				Margin = new Thickness(5, 0, 0, 20),
-				Scale = 0.8
-			});
+            var libraryBtn = CreateIBtn("IconLibrary.png");
+            libraryBtn.Clicked += OnLibraryButtonClicked;
 
-			Content = stack;
+            stack.Children.Add(homeBtn);
+            stack.Children.Add(addBtn);
+            stack.Children.Add(libraryBtn);
+
+            Content = stack;
 		}
+
+        private void OnLibraryButtonClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new LibraryPage());
+        }
+
+        private void OnAddButtonClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new AddingPage());
+        }
+
+        private void OnHomeButtonClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new HomePage());
+        }
+
+        private ImageButton CreateIBtn(string SourceOfImage)
+		{
+			return new ImageButton
+            {
+                Source = SourceOfImage,
+                BackgroundColor = Color.Gray,
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                Margin = new Thickness(5, 0, 0, 20),
+                Scale = 0.9,
+            };
+        }
 	}
 }
 

@@ -2,11 +2,15 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Echolalia"
     x:Class="Echolalia.Views.LibraryPage">
-    <ContentPage.Content>
-        <Label Text="LibraryPage"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
-    </ContentPage.Content>
+    <StackLayout>
+        <local:TopBarControl/>
+
+        <StackLayout VerticalOptions="Center">
+            <Label Text="LibraryPage"/>
+        </StackLayout>
+
+    </StackLayout>
 </ContentPage>
 
