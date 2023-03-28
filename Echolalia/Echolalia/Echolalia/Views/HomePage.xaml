@@ -5,13 +5,34 @@
     xmlns:local="clr-namespace:Echolalia"
     x:Class="Echolalia.Views.HomePage">
 
-    <StackLayout>
+    <StackLayout Padding="0" Margin="0" VerticalOptions="Start">
         <local:TopBarControl/>
 
-        <StackLayout VerticalOptions="Center">
+        <StackLayout Padding="0" Margin="10" >
+            <Frame CornerRadius="25" BackgroundColor="#FFC145">
+                <StackLayout HorizontalOptions="Center" HeightRequest="70">
+                    <Label Text="0" HorizontalOptions="Center" FontSize="60" FontFamily="Exo-Bold" TextColor="#643A29" Margin="0" Padding="-20"/>
+                    <Label Text="Word practiced today" HorizontalOptions="Center" FontSize="20" FontFamily="Exo-Bold" TextColor="#643A29"/> 
+                </StackLayout>
+            </Frame>
+            <Grid Padding="20" ColumnSpacing="25" RowSpacing="30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Grid.Row="0" CornerRadius="25" BackgroundColor="#EAEBFF" Text="Write phrase" TextColor="#643A29" FontSize="18" FontFamily="Exo-Bold"/>
+                <Button Grid.Column="1" Grid.Row="0" CornerRadius="25" BackgroundColor="#EAEBFF" Text="Repeat words" TextColor="#643A29" FontSize="18" FontFamily="Exo-Bold"/>
+                <Button Grid.Column="0" Grid.Row="1" CornerRadius="25" BackgroundColor="#EAEBFF" Text="Insert letters" TextColor="#643A29" FontSize="18" FontFamily="Exo-Bold"/>
+                <Button Grid.Column="1" Grid.Row="1" CornerRadius="25" BackgroundColor="#EAEBFF" Text="Insert words to phrase" TextColor="#643A29" FontSize="18" FontFamily="Exo-Bold"/>
+                <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" CornerRadius="25" BackgroundColor="#EAEBFF" Text="practice" TextColor="#643A29" FontSize="18" FontFamily="Exo-Bold"/>
+            </Grid>
         </StackLayout>
 
-        <local:DownBarControl/>
     </StackLayout>
 </ContentPage>
 

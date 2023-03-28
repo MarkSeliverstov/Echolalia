@@ -16,7 +16,7 @@ namespace Echolalia
 				Source = "IconSettings.png",
 				HorizontalOptions = LayoutOptions.StartAndExpand,
 				Scale = 0.9,
-				Margin = new Thickness(0, 20, 0, 0),
+				Margin = new Thickness(0, 20, 0, 0)
             });
 
             this.Children.Add(new Label

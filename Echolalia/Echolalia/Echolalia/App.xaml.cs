@@ -30,7 +30,7 @@ namespace Echolalia
         {
             InitializeComponent();
 
-            MainPage = new HomePage();
+            MainPage = new MainTabbedPage();
         }
 
         protected override void OnStart ()
