@@ -20,7 +20,7 @@ namespace Echolalia
 				Padding = new Thickness(60, 10, 60, 45)
 			};
 
-			var homeBtn = CreateIBtn("IconHomeActive.png");
+			var homeBtn = CreateIBtn("IconHome.png");
 			homeBtn.Clicked += OnHomeButtonClicked;
 
 			var addBtn = CreateIBtn("IconAdd.png");

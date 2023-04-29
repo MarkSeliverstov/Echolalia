@@ -10,11 +10,10 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              android:TabbedPage.ToolbarPlacement="Bottom"
              ios:TabbedPage.TranslucencyMode="Opaque"
-             xmlns:ffsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              >
              
   <!--Pages can be added as references or inline-->
-    <local1:HomePage IconImageSource="VectorHome.svg"/>
-    <local1:AddingPage IconImageSource="VectorHome.svg"/>
+    <local1:HomePage IconImageSource="IconHome.png"/>
+    <local1:AddingPage IconImageSource="IconAdd.png"/>
     <local1:LibraryPage IconImageSource="IconLibrary.png"/>
 </TabbedPage>
