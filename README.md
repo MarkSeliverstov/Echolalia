@@ -1,7 +1,8 @@
 # Echolalia
-The application is designed for practice, learning foreign languages (mainly English)
+The application is designed for practice, learning words in a foreign language. <br>
+Echolalia is based on the principle of Echolalia, which is based on repeated repetition and training.
 
-Echolalia is based on repeated repetition and training
+### 1. Created a design for Echolalia in Figma.
+![Alt text](design.png)
 
-# 1. I created [design for Echolalia](https://www.figma.com/file/lT8dzaokxH0heS61JDuYgs/Echolalia?node-id=0%3A1&t=5DpjncPRdMHv6ve7-1) in Figma.
-![design](echolalia-design.png)
+### 2. Wrote a specification for Echolalia ([Specification.md](Specification.md))

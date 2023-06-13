@@ -5,17 +5,26 @@
 Objective: Create the mobile application that will help users to learn words in foreign languages.
 
 This specification outlines the development of a learning mobile app using Xamarin. The app's goal is to help users learn words conveniently on their mobile devices. 
-By leveraging Xamarin's cross-platform capabilities, the app will be compatible with both Android and iOS devices, ensuring widespread accessibility.
 
 The app will offer essential features such as user registration, authentication, and customizable user profiles. 
 Users will be able to track their learning progress and watching their statistics. 
-The application will also provide the opportunity to add your own words or take existing ones. 
+The application will also provide the opportunity to add your own words or take existing ones from the server database.
 Users will be able to practice skills through exercises and tests.
 
 Development will follow the recommended Xamarin architecture, using C# as the programming language. 
 Data will be stored in a suitable database, allowing easy retrieval and management of user information, words and statistics.
 
 In summary, this specification aims to create a user-friendly words learning app that harnesses the power of Xamarin.
+
+## The main goals
+
+- Create backend for app on the server
+- Create frontend and main functionality in the Xamarin
+- Implement Authentication
+- Connect backend and frontend
+
+Using an external server will allow users to synchronize their data between devices and not lose it when reinstalling the application.
+Server will be hosted on the school server.
 
 ## Functional Requirements
 
@@ -32,17 +41,16 @@ In summary, this specification aims to create a user-friendly words learning app
 
 ### Learning Words
 
-- Ability to add your own words or phrases (should automatically determine if it is a word or phrase)
+- Ability to add your own words
 - Ability to take existing words or phrases from the server database
 - Ability to practice skills through exercises and tests
 
 ### Exercises
 
-- Repeat words - choose the correct translation
-- Write words - write the correct translation
-- Insert words - insert the missing word to the phrase
-- Write phrases - write the correct phrase
-- Random - random exercise
+- Repeating words - translation from the foreign language to the native language (choice)
+- Learning words - translation from the foreign language to the native language (choice)
+- Training words - translation from the native language to the foreign language (writing)
+---
 - Should show the correct answer if the user made a mistake
 - Ability to skip the word
 - Should show the number of correct and incorrect answers at the end of the exercise
@@ -96,28 +104,17 @@ In summary, this specification aims to create a user-friendly words learning app
 }
 ```
 
-#### Word and UserWord
+#### Word in server
 
 ```json
 {
   "id": "string",
   "word": "string",
-  "translation": "string",(?)
-  "type": "word | phrase",
-}
-```
-
-#### Phrase
-
-```json
-{
-  "id": "string",
-  "phrase": "string",
   "translation": "string",
 }
 ```
 
-#### UserWord
+#### Local word
 
 ```json
 {
@@ -126,12 +123,11 @@ In summary, this specification aims to create a user-friendly words learning app
   "word": "string",
   "translation": "string",
   "date": "string",
-  "isLearned": "boolean", (?)
-  "type": "word | phrase",
+  "isLearned": "boolean",
 }
 ```
 
-#### User Statistics
+#### Statistics
 
 ```json
 {
@@ -148,7 +144,7 @@ In summary, this specification aims to create a user-friendly words learning app
 }
 ```
 
-#### User Dictionary
+#### Locl dictionary
 
 ```json
 {
@@ -159,7 +155,6 @@ In summary, this specification aims to create a user-friendly words learning app
       "id": "string",
       "word": "string",
       "translation": "string",
-      "type": "word | phrase",
     }
   ]
 }
