@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Echolalia.ViewModels"
+    xmlns:local="clr-namespace:Echolalia.Models"
+    x:DataType="vm:DictionaryViewModel"
+    x:Class="Echolalia.Views.MyDictionaryPage"
+    Background="{StaticResource Background}"
+    Title="{Binding Title}"
+    Shell.NavBarIsVisible="True">
+
+    <ContentPage.Content>
+    <StackLayout>
+        <StackLayout BackgroundColor="#4A93FF">
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Margin="10,0,0,0">
+                <Label Text="Total Count: "
+                    Margin="0, 10, 0, 0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    TextColor="White"
+                    />
+                <Label Text="{Binding WordCount}"
+                    Margin="0, 10, 0, 0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    TextColor="White"
+                    />
+            </StackLayout>
+
+            <Grid ColumnSpacing="10"
+                    BackgroundColor="White"
+                    Padding="10" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0">
+                    <Label
+                        FontSize="18"
+                        TextColor="#5C5C5C"
+                        Text="Original"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"/>
+                </StackLayout>
+                <StackLayout Grid.Column="1">
+                    <Label
+                        FontSize="18"
+                        TextColor="#5C5C5C"
+                        Text="Translation"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+
+        </StackLayout>
+
+        <RefreshView x:Name="RefreshV"
+                        IsRefreshing="{Binding IsBusy}"
+                        Command="{Binding RefreshCmdAsync}">
+        <CollectionView ItemsSource="{Binding Translations}"
+                        SelectionMode="None"
+                        EmptyView="No words">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                <SwipeView>
+
+                    <SwipeView.RightItems>
+                    <SwipeItems>
+                        <SwipeItem
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DictionaryViewModel}},
+                                      Path=DeleteItemCmdAsync}"
+                            CommandParameter="{Binding Source={RelativeSource Self},
+                                               Path=BindingContext}"
+                            BackgroundColor="Red"
+                            IsDestructive="True"
+                            Text="Delete" />
+                        <SwipeItem
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DictionaryViewModel}},
+                                      Path=EditItemCmdAsync}"
+                            CommandParameter="{Binding Source={RelativeSource Self},
+                                               Path=BindingContext}"
+                            BackgroundColor="Orange"
+                            Text="Edit" />
+                    </SwipeItems>
+                    </SwipeView.RightItems>
+
+                    <StackLayout x:DataType="local:Item">
+                    <Grid ColumnSpacing="10">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"
+                                FontSize="18"
+                                TextColor="#5C5C5C"
+                                Text="{Binding Original}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Margin="10,5,0,5"/>
+
+                        <Label Grid.Column="1"
+                                FontSize="18"
+                                TextColor="#5C5C5C"
+                                Text="{Binding Translation}"
+                                HorizontalOptions="Center"
+                                Margin="0,5,10,5"/>
+
+                    </Grid>
+                    </StackLayout>
+                </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            </CollectionView>
+            </RefreshView>
+    </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

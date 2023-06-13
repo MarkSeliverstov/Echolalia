@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Echolalia.ViewModels"
+    x:DataType="vm:AddViewModel"
+    x:Class="Echolalia.Views.AddPage"
+    Background="{StaticResource Background}"
+    Title="{Binding Title}"
+    Shell.NavBarIsVisible="True">
+
+    <ContentPage.Content>
+    <StackLayout>
+        <StackLayout Margin="20">
+            <Frame>
+                <StackLayout Spacing="10">
+                    <Label Text="Add words to my dictionary"/>
+
+                    <Entry Text="{Binding EntryOriginalWord}"/>
+                    <Label Text="word/phrase/sentence"
+                           FontSize="16"
+                           HorizontalOptions="Center"/>
+
+                    <Entry Text="{Binding EntryTranslationWord}" Margin="0,20,0,0"/>
+                    <Label Text="translate"
+                           FontSize="16"
+                           HorizontalOptions="Center"/>
+
+                    <Button Command="{Binding AddWord}"
+                            Text="{Binding AddWordBtnTitle}"
+                            BackgroundColor="{StaticResource MyGreen}"
+                            Margin="0,20,0,0"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

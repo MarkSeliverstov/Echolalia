@@ -5,9 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C56386ED-D696-4AF0-9531-5C873CD9DCCF}</ProjectGuid>
+    <ProjectGuid>{E4333609-0850-4C49-84D0-488DD98ECFF1}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
+    <TemplateGuid>{89a4fe7c-635d-49c9-8d8c-5cd363c0d68d}</TemplateGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Echolalia.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
@@ -70,7 +70,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -124,7 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.7" />
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.8.116</Version>
     </PackageReference>
@@ -132,18 +131,18 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Echolalia\Echolalia.csproj">
-      <Project>{663AD4DC-0F35-4DB3-8F72-08943F51C483}</Project>
+      <Project>{8449EB70-5003-4143-AA3A-C9C3AD2E79C1}</Project>
       <Name>Echolalia</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\IconAdd.png" />
-    <BundleResource Include="Resources\IconAddActive.png" />
-    <BundleResource Include="Resources\IconHome.png" />
-    <BundleResource Include="Resources\IconHomeActive.png" />
-    <BundleResource Include="Resources\IconLibrary.png" />
-    <BundleResource Include="Resources\IconLibraryActive.png" />
-    <BundleResource Include="Resources\IconSettings.png" />
-    <BundleResource Include="Resources\IconStats.png" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\addIcon.png" />
+    <BundleResource Include="Resources\dictIcon.png" />
+    <BundleResource Include="Resources\homeIcon.png" />
+    <BundleResource Include="Resources\settingsIcon.png" />
+    <BundleResource Include="Resources\statsIcon.png" />
   </ItemGroup>
 </Project>

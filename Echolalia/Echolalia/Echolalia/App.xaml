@@ -2,7 +2,47 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Echolalia.App">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
     <Application.Resources>
+        <ResourceDictionary>
+            <!--
+                Definition of main colors
+            -->
+            <Color x:Key="MyBlue">#2196F3</Color>
+            <Color x:Key="MyGreen">#46C931</Color>
+            <Color x:Key="MyYellow">#FFB74A</Color>
+            <Color x:Key="MyRed">#FB5656</Color>
+            <Color x:Key="MyDarkGray">#5C5C5C</Color>
+            <Color x:Key="Background">#F0F0F0</Color>
 
+            <!--
+                Definition of main styles
+            -->
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
+            <Style TargetType="Frame">
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource MyDarkGray}"/>
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="ClearButtonVisibility" Value="WhileEditing"/>
+            </Style>
+
+        </ResourceDictionary>        
     </Application.Resources>
 </Application>
+

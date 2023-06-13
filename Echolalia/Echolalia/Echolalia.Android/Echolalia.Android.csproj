@@ -3,9 +3,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D0EDDB0A-33B3-41C7-A03E-ED92DE93422F}</ProjectGuid>
+    <ProjectGuid>{0CC94A7D-F367-45CF-B4D6-1285292B3633}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
+    <TemplateGuid>{6968b3a4-1835-46a3-ac5c-1ae33b475983}</TemplateGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Echolalia.Droid</RootNamespace>
     <AssemblyName>Echolalia.Android</AssemblyName>
@@ -48,16 +48,19 @@
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.7" />
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.8.116</Version>
+    </PackageReference>
+    <PackageReference Include="Microcharts.Forms">
+      <Version>0.9.5.9</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -85,51 +88,35 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\drawable\IconAdd.png">
+    <AndroidResource Include="Resources\drawable\addIcon.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\IconHome.png">
+    <AndroidResource Include="Resources\drawable\dictIcon.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\IconLibrary.png">
+    <AndroidResource Include="Resources\drawable\homeIcon.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\IconSettings.png">
+    <AndroidResource Include="Resources\drawable\settingsIcon.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\IconStats.png">
+    <AndroidResource Include="Resources\drawable\statsIcon.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\IconAddActive.png">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\IconLibraryActive.png">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\IconHomeActive.png">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\VectorHome.svg">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Echolalia\Echolalia.csproj">
-      <Project>{663AD4DC-0F35-4DB3-8F72-08943F51C483}</Project>
+      <Project>{8449EB70-5003-4143-AA3A-C9C3AD2E79C1}</Project>
       <Name>Echolalia</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\drawable\" />
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

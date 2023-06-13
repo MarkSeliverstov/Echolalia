@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+    x:Class="Echolalia.Views.StatisticsPage"
+    xmlns:vm="clr-namespace:Echolalia.ViewModels"
+    x:DataType="vm:StatisticsViewModel"
+    Background="{StaticResource Background}"
+    Title="{Binding Title}"
+    Shell.NavBarIsVisible="true">
+
+    <ContentPage.Behaviors>
+    </ContentPage.Behaviors>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Start">
+        <StackLayout Margin="20">
+            <Frame>
+                <StackLayout Spacing="10">
+                    <Label Text="Statistics"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           Margin="0,0,0,20"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Learn words in a"
+                               FontSize="14"
+                               FontAttributes="Bold"/>
+                        <Label Text="{Binding ThisMouth}"
+                               FontSize="14"
+                               FontAttributes="Bold"/>
+                    </StackLayout>
+
+                    <Line BackgroundColor="#5C5C5C" HeightRequest="1"/>
+                    <microcharts:ChartView Chart="{Binding BarStatsChart}"
+                                           HeightRequest="200"
+                                           Margin="0, -10, 0, -11"/>
+                    <Line BackgroundColor="#5C5C5C" HeightRequest="1"/>
+
+                    <Label Text="Words learned"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           Margin="0, 40, 0, 0"/>
+                    <microcharts:ChartView Chart="{Binding DonutLearnedChart}" HeightRequest="150"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+        <Button Text="Settings"
+                Clicked="btnSettings_Clicked"
+                BackgroundColor="{StaticResource MyBlue}"
+                Margin="20,0,20,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

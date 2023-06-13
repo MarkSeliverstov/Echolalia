@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:Echolalia.Views"
+       x:Class="Echolalia.AppShell">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource MyBlue}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource MyBlue}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+
+    <TabBar>
+        <ShellContent Title="Home" Icon="homeIcon.png" ContentTemplate="{DataTemplate views:HomePage}" />
+        <ShellContent Title="Add" Icon="addIcon.png" ContentTemplate="{DataTemplate views:AddPage}" />
+        <ShellContent Title="Dictionary" Icon="dictIcon.png" ContentTemplate="{DataTemplate views:MyDictionaryPage}"/>
+        <ShellContent Title="Statistics" Icon="statsIcon.png" ContentTemplate="{DataTemplate views:StatisticsPage}" />
+    </TabBar>
+
+</Shell>

@@ -2,11 +2,81 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Echolalia.Views.SettingsPage">
+    x:Class="Echolalia.Views.SettingsPage"
+    xmlns:vm="clr-namespace:Echolalia.ViewModels"
+    x:DataType="vm:SettingsViewModel"
+    Background="{StaticResource Background}"
+    Title="{Binding Title}">
     <ContentPage.Content>
-        <Label Text="SettingsPage"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
+
+        <StackLayout Margin="20">
+            <Frame>
+                <StackLayout>
+                    <Label Text="{Binding UserName}"
+                           FontSize="30"
+                           TextColor="#5C5C5C"
+                           FontAttributes="Bold"/>
+                    <Button BackgroundColor="Transparent"
+                            Command="{Binding DeleteAllDataCmd}"
+                            Text="Delete all data"
+                            TextColor="#FB5656"
+                            FontSize="14"
+                            HorizontalOptions="Start"
+                            FontAttributes="Bold"/>
+
+                    <TableView Intent="Settings"
+                               BackgroundColor="White"
+                               Margin="-20, 0,-20,0"
+                               HeightRequest="200">
+                        <TableRoot>
+                            <TableSection>
+                                <EntryCell LabelColor="#5C5C5C"
+                                           Label="Name:"
+                                           Text="{Binding EntryCellUserName}"
+                                           Placeholder="Enter Your name here"
+                                           HorizontalTextAlignment="End"/>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Select count of words per train"
+                                               Margin="20, 0, 20, 0"
+                                               FontSize="18"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalTextAlignment="Center"/>
+                                        <Picker TextColor="#5C5C5C"
+                                                Title="Select"
+                                                ItemsSource="{Binding CountWordsPerTrainList}"
+                                                SelectedIndex="{Binding SelectedCountWordsPerTrain}"
+                                                TitleColor="#5C5C5C"
+                                                HorizontalTextAlignment="Center">
+                                        </Picker>
+                                    </StackLayout>
+                                </ViewCell>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Interface:"
+                                               Margin="20, 0, 190, 0"
+                                               FontSize="18"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalTextAlignment="Center"/>
+                                        <Picker TextColor="#5C5C5C"
+                                                Title="Select"
+                                                ItemsSource="{Binding LanguagesList}"
+                                                SelectedIndex="{Binding SelectedLanguage}"
+                                                TitleColor="#5C5C5C"
+                                                HorizontalTextAlignment="Center">
+                                        </Picker>
+                                    </StackLayout>
+                                </ViewCell>
+                            </TableSection>
+                        </TableRoot>
+                    </TableView>
+                    <Button Command="{Binding ConfirmCmd}"
+                            Text="Confirm"
+                            BackgroundColor="#46C931"
+                            Margin="20,0,20,20"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
 

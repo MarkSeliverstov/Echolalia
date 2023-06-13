@@ -1,28 +1,29 @@
 ﻿using System;
-using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using Echolalia.Data;
 using Echolalia.Views;
+using Echolalia.Data;
+using System.IO;
 
 namespace Echolalia
 {
     public partial class App : Application
     {
+        static localDB db;
 
-        static LibraryDB libraryDB;
-
-        public static LibraryDB LibraryDB
+        public static localDB localDB
         {
             get
             {
-                if (libraryDB == null) {
-                    libraryDB = new LibraryDB(
-                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                        "LibraryDatabase.db3"));
+                if (db == null)
+                {
+                    db = new localDB(Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        "local.db3"));
                 }
-                return libraryDB;
+
+                return db;
             }
         }
 
@@ -30,7 +31,7 @@ namespace Echolalia
         {
             InitializeComponent();
 
-            MainPage = new MainTabbedPage();
+            MainPage = new AppShell();
         }
 
         protected override void OnStart ()
