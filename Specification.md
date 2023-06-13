@@ -28,6 +28,7 @@ In summary, this specification aims to create a user-friendly words learning app
 
 - Ability to create and edit a user profile
 - Ability to view user profile and statistics
+- Ability to synchronize user data with the server database
 
 ### Learning Words
 
@@ -77,3 +78,131 @@ In summary, this specification aims to create a user-friendly words learning app
 - Using the ASP.NET Core Web API for the server side.
 - Using the school server for hosting the database and the Web API.
 - Using the Figma for design.
+
+## Expected Database Structure
+
+### Expected Entities
+
+#### User
+
+```json
+{
+  "id": "string",
+  "email": "string",
+  "password": "string",
+  "name": "string",
+  "surname": "string",
+  "avatar": "string",
+}
+```
+
+#### Word and UserWord
+
+```json
+{
+  "id": "string",
+  "word": "string",
+  "translation": "string",(?)
+  "type": "word | phrase",
+}
+```
+
+#### Phrase
+
+```json
+{
+  "id": "string",
+  "phrase": "string",
+  "translation": "string",
+}
+```
+
+#### UserWord
+
+```json
+{
+  "id": "string",
+  "userId": "string",
+  "word": "string",
+  "translation": "string",
+  "date": "string",
+  "isLearned": "boolean", (?)
+  "type": "word | phrase",
+}
+```
+
+#### User Statistics
+
+```json
+{
+  "id": "string",
+  "userId": "string",
+  "date": "string",
+  "wordsLearned": "number",
+  "wordsLearnedPerDay": [
+    {
+      "date": "string",
+      "wordsLearned": "number",
+    }
+  ]
+}
+```
+
+#### User Dictionary
+
+```json
+{
+  "id": "string",
+  "userId": "string",
+  "words": [
+    {
+      "id": "string",
+      "word": "string",
+      "translation": "string",
+      "type": "word | phrase",
+    }
+  ]
+}
+```
+
+---
+### Expected API
+
+Registration and authentication
+```
+POST /api/auth/register
+```
+```
+POST /api/auth/login
+```
+
+Get and update user information
+```
+GET /api/user/{id}
+```
+```
+PUT /api/user/{id}
+```
+
+Get words by topic id from server database
+```
+GET /api/words/{id}
+```
+
+Add, update and delete words in user dictionary
+
+```
+GET /api/userdict/{id}
+```
+```
+DELETE /api/userdict/{id}
+```
+```
+POST /api/userdict/word/{id}
+```
+```
+PUT /api/userdict/word/{id}
+```
+```
+DELETE /api/userdict/word/{id}
+```
