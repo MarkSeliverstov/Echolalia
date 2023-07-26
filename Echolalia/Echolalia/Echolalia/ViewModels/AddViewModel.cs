@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Echolalia.ViewModels
 {
-    public class AddViewModel : BindableObject
+    public class AddViewModel : BaseViewModel
     {
         public string Title { get; }
         public string AddWordBtnTitle { get; }
@@ -22,10 +22,7 @@ namespace Echolalia.ViewModels
         string _translationWord = null;
         public string EntryTranslationWord {
             get => _translationWord;
-            set {
-                _translationWord = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _translationWord, value);
         }
         public Command AddWord { get;  }
 
@@ -33,7 +30,7 @@ namespace Echolalia.ViewModels
         {
             Title = "Add to Dictionary";
             AddWordBtnTitle = "Add";
-            AddWord = new Command(() => ExecuteAddWordCmd());
+            AddWord = new Command(ExecuteAddWordCmd);
         }
 
         public async void ExecuteAddWordCmd()
@@ -47,7 +44,7 @@ namespace Echolalia.ViewModels
             }
             await App.localDB.SaveItem(new Item
             {
-                IsCustom = true,
+                progress = LearningProgress.unknown,
                 Original = EntryOriginalWord,
                 Translation = EntryTranslationWord
             });

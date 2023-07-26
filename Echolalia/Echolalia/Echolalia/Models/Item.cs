@@ -9,8 +9,6 @@ namespace Echolalia.Models
         public string Original { get; set; }
         public string Translation { get; set; }
         public LearningProgress progress { get; set; }
-        public bool IsCustom { get; set; }
-        public string Group { get; set; }
     }
 
     public enum LearningProgress

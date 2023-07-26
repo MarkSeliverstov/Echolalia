@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <BuildWithMSBuildOnMono>true</BuildWithMSBuildOnMono>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,8 +14,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Data\" />
+    <None Remove="Helpers\" />
+    <None Remove="CustomElements\" />
+    <None Remove="ViewModels\Tasks\" />
+    <None Remove="Views\Tasks\" />
+    <None Remove="ViewModels\Tasks\Questions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="CustomElements\" />
+    <Folder Include="ViewModels\Tasks\" />
+    <Folder Include="Views\Tasks\" />
+    <Folder Include="ViewModels\Tasks\Questions\" />
   </ItemGroup>
 </Project>

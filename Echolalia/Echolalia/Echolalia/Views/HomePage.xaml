@@ -2,8 +2,9 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Echolalia"
+    xmlns:viewmodels="clr-namespace:Echolalia.ViewModels"
     x:Class="Echolalia.Views.HomePage"
+    x:DataType="viewmodels:HomeViewModel"
     Title="{Binding Title}"
     Background="{StaticResource Background}"
     Shell.NavBarIsVisible="True">
@@ -21,12 +22,14 @@
             </Frame>
 
             <Button Text="Learn new"
-                    BackgroundColor="{StaticResource MyGreen}"/>
-            <Button Text="Train"
-                    BackgroundColor="{StaticResource MyBlue}"/>
-            <Button Text="Knowledge test"
-                    BackgroundColor="{StaticResource MyYellow}"/>
+                    BackgroundColor="{StaticResource MyGreen}"
+                    Command="{Binding LearnNewWordsCmd}"/>
+            <Button Text="Choosing"
+                    BackgroundColor="{StaticResource MyBlue}"
+                    Command="{Binding ChoosingWordsCmd}"/>
+            <Button Text="Writing"
+                    BackgroundColor="{StaticResource MyYellow}"
+                    Command="{Binding WritingWordsCmd}"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>
-

@@ -18,7 +18,6 @@ namespace Echolalia.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            await (BindingContext as StatisticsViewModel).CreateBarStatsChart();
             await (BindingContext as StatisticsViewModel).CreateDonutLearnedChart();
         }
 

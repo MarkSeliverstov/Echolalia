@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<StackLayout
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Echolalia.CustomElements.Question"
+    xmlns:questions="clr-namespace:Echolalia.ViewModels.Tasks.Questions"
+    x:DataType="questions:BaseQuestionViewModel">
+
+    <Frame>
+        <StackLayout Spacing="10">
+            <Label Text="{Binding Question}"
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    Margin="0,10,0,0"/>
+
+            <StackLayout IsVisible="{Binding IsVisibleAnswer}">
+                <Line HeightRequest="2"
+                      BackgroundColor="{StaticResource Background}"/>
+
+                <Label Text="{Binding Answer}"
+                        FontSize="16"
+                        HorizontalOptions="Center"
+                        Margin="0,10,0,0"
+                        TextColor="{Binding AnswerColor}"
+                        FontAttributes="Bold"/>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</StackLayout>
+

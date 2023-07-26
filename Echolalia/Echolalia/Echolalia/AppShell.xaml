@@ -22,7 +22,6 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-
     <TabBar>
         <ShellContent Title="Home" Icon="homeIcon.png" ContentTemplate="{DataTemplate views:HomePage}" />
         <ShellContent Title="Add" Icon="addIcon.png" ContentTemplate="{DataTemplate views:AddPage}" />

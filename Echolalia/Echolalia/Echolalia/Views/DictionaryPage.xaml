@@ -89,7 +89,7 @@
                     </SwipeItems>
                     </SwipeView.RightItems>
 
-                    <StackLayout x:DataType="local:Item">
+                    <StackLayout x:DataType="local:Item" BackgroundColor="White">
                     <Grid ColumnSpacing="10">
 
                         <Grid.RowDefinitions>
@@ -116,6 +116,7 @@
                                 Margin="0,5,10,5"/>
 
                     </Grid>
+                    <Line HeightRequest="5" BackgroundColor="{StaticResource Background}"/>
                     </StackLayout>
                 </SwipeView>
                 </DataTemplate>

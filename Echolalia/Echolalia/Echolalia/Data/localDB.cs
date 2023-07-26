@@ -22,13 +22,11 @@ namespace Echolalia.Data
         private async void CreateTables()
         {
             await _database.CreateTableAsync<Item>();
-            await _database.CreateTableAsync<DayLearnedStats>();
         }
 
-        /*
-         For Items
-         */
         public Task<List<Item>> GetItemsAsync() => _database.Table<Item>().ToListAsync();
+
+        public Task<int> EditItem(Item currentItem) => _database.UpdateAsync(currentItem);
 
         public Task<int> SaveItem<T>(T item) => _database.InsertAsync(item);
 
@@ -36,22 +34,9 @@ namespace Echolalia.Data
 
         public Task<int> ClearAllData()
         {
-            _database.DeleteAllAsync<Item>();
-            return _database.DeleteAllAsync<DayLearnedStats>();
+            return _database.DeleteAllAsync<Item>();
         }
 
-        public Task<int> EditItem(Item item) => _database.UpdateAsync(item);
-
-        public Task<int> Count() => _database.Table<Item>().CountAsync();
-
-        /*
-         For DayLearnedStats
-         */
-
-        public Task<List<DayLearnedStats>> GetMouthStats()
-        {
-            return _database.Table<DayLearnedStats>().ToListAsync();
-        }
     }
 }
 

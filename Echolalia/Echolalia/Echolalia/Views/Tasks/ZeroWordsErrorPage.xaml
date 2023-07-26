@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Echolalia.Views.Tasks.ZeroWordsErrorPage"
+    Shell.TabBarIsVisible="False"
+    Shell.NavBarIsVisible="False"
+    Title="Warning">
+    <ContentPage.Content>
+        <StackLayout Margin="20, 80">
+            <Label Text="Add more words to dict :)"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"/>
+            <Button Text="Ok"
+                        BackgroundColor="{StaticResource MyYellow}"
+                        Command="{Binding HomeCmd}"
+                        VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

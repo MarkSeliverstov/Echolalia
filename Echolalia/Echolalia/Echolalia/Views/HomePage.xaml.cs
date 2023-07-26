@@ -11,9 +11,9 @@ namespace Echolalia.Views
 	{	
 		public HomePage ()
 		{
-			InitializeComponent ();
+            InitializeComponent();
 			this.BindingContext = new HomeViewModel();
 		}
-	}
+    }
 }
 

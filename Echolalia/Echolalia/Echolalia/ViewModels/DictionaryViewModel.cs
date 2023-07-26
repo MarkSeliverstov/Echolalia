@@ -1,14 +1,12 @@
-﻿using System;
-using Echolalia.Models;
+﻿using Echolalia.Models;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using System.Threading.Tasks;
-using System.ComponentModel;
 using Echolalia.Views;
 
 namespace Echolalia.ViewModels
 {
-    public class DictionaryViewModel : BindableObject
+    public class DictionaryViewModel : BaseViewModel
     {
 
         public string Title { get; }
@@ -32,24 +30,14 @@ namespace Echolalia.ViewModels
         public int WordCount
         {
             get => _wordCount;
-            set
-            {
-                if (_wordCount == value) return;
-                _wordCount = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _wordCount, value);
         }
 
         bool _isBusy;
         public bool IsBusy
         {
             get => _isBusy;
-            set
-            {
-                if (_isBusy == value) return;
-                _isBusy = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _isBusy, value);
         }
 
         private void RefrechAsync()

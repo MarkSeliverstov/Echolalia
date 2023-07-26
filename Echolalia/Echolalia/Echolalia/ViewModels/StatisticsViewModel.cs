@@ -5,11 +5,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using Echolalia.Models;
-using Xamarin.Forms;
 
 namespace Echolalia.ViewModels
 {
-	public class StatisticsViewModel: BindableObject
+	public class StatisticsViewModel: BaseViewModel
     {
 		public string Title { get; }
         public string ThisMouth { get; }
@@ -18,28 +17,20 @@ namespace Echolalia.ViewModels
         public BarChart BarStatsChart
         {
             get => _barStatsChart;
-            private set
-            {
-                _barStatsChart = value;
-                OnPropertyChanged();
-            }
+            private set => SetProperty(ref _barStatsChart, value);
         }
 
         DonutChart _donutLearnedChart;
         public DonutChart DonutLearnedChart
         {
             get => _donutLearnedChart;
-            private set
-            {
-                _donutLearnedChart = value;
-                OnPropertyChanged();
-            }
+            private set => SetProperty(ref _donutLearnedChart, value);
         }
 
         public StatisticsViewModel()
 		{
 			Title = "Stats";
-            ThisMouth = DateTime.Today.Month.ToString();
+            ThisMouth = DateTime.Today.ToString("MMMM");
         }
 
         public async Task CreateDonutLearnedChart()
@@ -57,7 +48,8 @@ namespace Echolalia.ViewModels
         {
             var items = await App.localDB.GetItemsAsync();
             int learnedCount = items.Where((item) => item.progress == LearningProgress.learned).Count();
-            int allWordsCount = items.Count();
+            int inProcessCount = items.Where((item) => item.progress == LearningProgress.inProcess).Count();
+            int notLearnedCount = items.Count() - inProcessCount - learnedCount;
 
             return new List<ChartEntry>()
             {
@@ -66,62 +58,17 @@ namespace Echolalia.ViewModels
                     ValueLabel=learnedCount.ToString(),
                     Color = SKColor.Parse("#46C931"),
                     ValueLabelColor = SKColor.Parse("#46C931") },
-                new ChartEntry(allWordsCount) {
+                new ChartEntry(inProcessCount) {
+                    Label="InProcess",
+                    ValueLabel=inProcessCount.ToString(),
+                    Color = SKColor.Parse("#FFB74A"),
+                    ValueLabelColor = SKColor.Parse("#FFB74A") },
+                new ChartEntry(notLearnedCount) {
                     Label="Not learned",
-                    ValueLabel=allWordsCount.ToString(),
+                    ValueLabel=notLearnedCount.ToString(),
                     Color = SKColor.Parse("#FB5656"),
                     ValueLabelColor = SKColor.Parse("#FB5656")}
             };
-        }
-
-        public async Task CreateBarStatsChart()
-        {
-            List<ChartEntry> entries = await GetMouthStats();
-            BarStatsChart = new BarChart()
-            {
-                Entries = entries,
-                LabelTextSize = 40,
-                Margin = 2,
-                LabelColor = SKColor.Parse("#5C5C5C"),
-                LabelOrientation = Orientation.Vertical,
-                ValueLabelOrientation = Orientation.Vertical
-            };
-        }
-
-        private async Task<List<ChartEntry>> GetMouthStats()
-        {
-            List<ChartEntry> entries = new List<ChartEntry>();
-            var response = await App.localDB.GetMouthStats();
-            var stats = response.Where((item) =>
-                item.date.Month == DateTime.Today.Month &&
-                item.date.Year == DateTime.Today.Year);
-
-
-            DateTime now = DateTime.Today;
-            int daysInMouth = DateTime.DaysInMonth(now.Year, now.Month);
-
-            for (int i = 1; i <= daysInMouth; i++)
-            {
-                var thisDaysInDB = stats.Where((item) => item.date.Day == i).ToArray();
-                if (thisDaysInDB != null && thisDaysInDB.Count() >= 1)
-                {
-                    entries.Add(
-                        new ChartEntry(thisDaysInDB[0].count) {
-                            Label= i.ToString(),
-                            ValueLabel = thisDaysInDB[0].count.ToString(),
-                            Color = SKColor.Parse("#46C931") }
-                    );
-                    continue;
-                }
-                entries.Add(
-                    new ChartEntry(0) {
-                        Label= i.ToString(),
-                        ValueLabel = "",
-                        Color = SKColor.Parse("#FFB74A") }
-                );
-            }
-
-            return entries;
         }
     }
 }

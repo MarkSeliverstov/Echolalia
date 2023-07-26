@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Echolalia.Views.Tasks.ResultsPage"
+    xmlns:rp="clr-namespace:Echolalia.ViewModels.Tasks"
+    x:DataType="rp:ResultsPageViewModel"
+    Shell.TabBarIsVisible = "False"
+    Shell.NavBarIsVisible = "False"
+    Background="{StaticResource Background}">
+    <ContentPage.Content>
+        <StackLayout Padding="20, 100">
+            <Frame VerticalOptions="CenterAndExpand">
+                <StackLayout Spacing="10">
+                    <Label Text="{Binding LabelOfResult}"
+                           HorizontalOptions="Center"
+                           FontSize="24"/>
+                    <Label Text="{Binding Result}"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+            <Button Text="Ok"
+                    BackgroundColor="{StaticResource MyYellow}"
+                    Command="{Binding HomeCmd}"
+                    VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

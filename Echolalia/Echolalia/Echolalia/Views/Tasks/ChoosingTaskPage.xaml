@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Echolalia.Views.Tasks.ChoosingTaskPage"
+    xmlns:ce="clr-namespace:Echolalia.CustomElements"
+    xmlns:vmTask="clr-namespace:Echolalia.ViewModels.Tasks"
+    x:DataType="vmTask:ChoosingTaskViewModel"
+    Background="{StaticResource Background}"
+    Shell.TabBarIsVisible="False"
+    Title="{Binding Title}">
+
+    <ContentPage.Content>
+        <StackLayout Padding="20, 40, 20, 40">
+            <ce:Question BindingContext="{Binding QuestionContext, Mode=OneWay}"/>
+            <StackLayout IsVisible="{Binding IsVisibleAnswers}"
+                         VerticalOptions="EndAndExpand">
+
+                <Button Text="{Binding ButtonsTextList[0]}"
+                        Command="{Binding AnswerCmd}"
+                        CommandParameter="{Binding Source={RelativeSource Self},
+                                           Path=Text}"
+                        Background="{StaticResource MyYellow}"/>
+                <Button Text="{Binding ButtonsTextList[1]}"
+                        Command="{Binding AnswerCmd}"
+                        CommandParameter="{Binding Source={RelativeSource Self},
+                                           Path=Text}"
+                        Background="{StaticResource MyYellow}"/>
+                <Button Text="{Binding ButtonsTextList[2]}"
+                        Command="{Binding AnswerCmd}"
+                        CommandParameter="{Binding Source={RelativeSource Self},
+                                           Path=Text}"
+                        Background="{StaticResource MyYellow}"/>
+                <Button Text="{Binding ButtonsTextList[3]}"
+                        Command="{Binding AnswerCmd}"
+                        CommandParameter="{Binding Source={RelativeSource Self},
+                                           Path=Text}"
+                        Background="{StaticResource MyYellow}"/>
+
+                <ce:ControllBtns/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+
