@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace Echolalia.Models
 {
@@ -9,6 +10,7 @@ namespace Echolalia.Models
         public string Original { get; set; }
         public string Translation { get; set; }
         public LearningProgress progress { get; set; }
+        public DateTime LastPracticed { get; set; }
     }
 
     public enum LearningProgress

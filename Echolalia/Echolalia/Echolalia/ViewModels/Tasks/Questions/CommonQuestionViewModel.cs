@@ -14,7 +14,7 @@ namespace Echolalia.ViewModels.Tasks.Questions
         {
             var response = await App.localDB.GetItemsAsync();
             var wordsInProcess = response.Where(
-                (item) => item.progress > LearningProgress.unknown
+                (item) => item.progress >= LearningProgress.unknown
             ).ToList();
 
             return wordsInProcess;

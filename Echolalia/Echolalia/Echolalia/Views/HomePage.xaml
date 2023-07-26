@@ -13,7 +13,7 @@
         <StackLayout Margin="20" Spacing="30" >
             <Frame>
                 <StackLayout HorizontalOptions="Center">
-                    <Label Text="1000"
+                    <Label Text="{Binding CountPracticeWordToday}"
                            HorizontalOptions="Center"
                            FontSize="60"
                            FontAttributes="Bold"/>

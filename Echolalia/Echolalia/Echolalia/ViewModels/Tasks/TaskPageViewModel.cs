@@ -81,6 +81,17 @@ namespace Echolalia.ViewModels.Tasks
                 {
                     currentItem.progress++;
                 }
+                currentItem.LastPracticed = DateTime.Today;
+                App.localDB.EditItem(currentItem);
+            }
+            else
+            {
+                Item currentItem = QuestionContext.GetCurrentItem();
+                if (currentItem.progress > Models.LearningProgress.unknown)
+                {
+                    currentItem.progress--;
+                }
+                currentItem.LastPracticed = DateTime.Today;
                 App.localDB.EditItem(currentItem);
             }
 
@@ -105,7 +116,12 @@ namespace Echolalia.ViewModels.Tasks
 
         public virtual void CheckAnswer()
         {
-            bool isCorrect = (QuestionContext.Answer.ToLower() == UserAnswer.ToLower());
+            bool isCorrect = false;
+            if (UserAnswer != null)
+            {
+                isCorrect = (QuestionContext.Answer.ToLower().Trim() == UserAnswer.ToLower().Trim());
+            }
+
             QuestionContext.ShowAnswer(isCorrect);
             UpdateControlls();
         }

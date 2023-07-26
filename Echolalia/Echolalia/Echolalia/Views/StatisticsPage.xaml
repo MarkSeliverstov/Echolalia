@@ -19,14 +19,6 @@
                            FontSize="20"
                            FontAttributes="Bold"
                            Margin="0,0,0,20"/>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Learn words in "
-                               FontSize="14"
-                               FontAttributes="Bold"/>
-                        <Label Text="{Binding ThisMouth}"
-                               FontSize="14"
-                               FontAttributes="Bold"/>
-                    </StackLayout>
 
                     <Line BackgroundColor="#5C5C5C" HeightRequest="1"/>
                     <Label Text="Words learned"
