@@ -26,7 +26,7 @@ namespace Echolalia.ViewModels.Tasks
         public ChoosingTaskViewModel(BaseQuestionViewModel questionContext) : base(questionContext)
         {
             CheckAnswerCmd = new Command(CheckAnswer);
-            AnswerCmd = new Command((arg) => PerformAnswerCmd(arg));
+            AnswerCmd = new Command(PerformAnswerCmd);
             ButtonsTextList = new List<string>(BtnsCount);
             GenerateAnswers();
         }

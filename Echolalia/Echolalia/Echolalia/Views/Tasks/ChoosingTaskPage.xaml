@@ -37,8 +37,8 @@
                                            Path=Text}"
                         Background="{StaticResource MyYellow}"/>
 
-                <ce:ControllBtns/>
             </StackLayout>
+            <ce:ControllBtns/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

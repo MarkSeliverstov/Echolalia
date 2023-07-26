@@ -16,12 +16,14 @@
                 <StackLayout Spacing="10">
                     <Label Text="Add words to my dictionary"/>
 
-                    <Entry Text="{Binding EntryOriginalWord}"/>
+                    <Entry Text="{Binding EntryOriginalWord}"
+                           TextColor="Black"/>
                     <Label Text="word/phrase/sentence"
                            FontSize="16"
                            HorizontalOptions="Center"/>
 
-                    <Entry Text="{Binding EntryTranslationWord}" Margin="0,20,0,0"/>
+                    <Entry Text="{Binding EntryTranslationWord}" Margin="0,20,0,0"
+                           TextColor="Black"/>
                     <Label Text="translate"
                            FontSize="16"
                            HorizontalOptions="Center"/>
