@@ -10,16 +10,6 @@ namespace Echolalia.ViewModels
 {
 	public class StatisticsViewModel: BaseViewModel
     {
-		public string Title { get; }
-        public string ThisMouth { get; }
-
-        BarChart _barStatsChart;
-        public BarChart BarStatsChart
-        {
-            get => _barStatsChart;
-            private set => SetProperty(ref _barStatsChart, value);
-        }
-
         DonutChart _donutLearnedChart;
         public DonutChart DonutLearnedChart
         {
@@ -29,13 +19,12 @@ namespace Echolalia.ViewModels
 
         public StatisticsViewModel()
 		{
-			Title = "Stats";
-            ThisMouth = DateTime.Today.ToString("MMMM");
+            this.Title = "Stats";
         }
 
-        public async Task CreateDonutLearnedChart()
+        public async Task CreateDonutChartAsync()
         {
-            List<ChartEntry> entries = await GetLearnedStats();
+            List<ChartEntry> entries = await GetStatsAsync();
             DonutLearnedChart = new DonutChart()
             {
                 Entries = entries,
@@ -44,32 +33,45 @@ namespace Echolalia.ViewModels
             };
         }
 
-        private async Task<List<ChartEntry>> GetLearnedStats()
+        readonly SKColor learned = SKColor.Parse("#46C931");
+        readonly SKColor inProcess = SKColor.Parse("#FFB74A");
+        readonly SKColor notLearned = SKColor.Parse("#FB5656");
+
+        private async Task<List<ChartEntry>> GetStatsAsync()
         {
             var items = await App.localDB.GetItemsAsync();
-            int learnedCount = items.Where((item) => item.progress == LearningProgress.learned).Count();
-            int inProcessCount = items.Where((item) => item.progress == LearningProgress.inProcess).Count();
-            int notLearnedCount = items.Count() - inProcessCount - learnedCount;
+
+            int learnedWordsCount = items.Where(
+                (item) => item.Progress == LearningProgress.learned
+            ).Count();
+
+            int inProcessWordsCount = items.Where(
+                (item) => item.Progress == LearningProgress.inProcess
+            ).Count();
+
+            int notLearnedCount = items.Count() - inProcessWordsCount - learnedWordsCount;
 
             return new List<ChartEntry>()
             {
-                new ChartEntry(learnedCount) {
+                new ChartEntry(learnedWordsCount) {
                     Label="Learned",
-                    ValueLabel=learnedCount.ToString(),
-                    Color = SKColor.Parse("#46C931"),
-                    ValueLabelColor = SKColor.Parse("#46C931") },
-                new ChartEntry(inProcessCount) {
+                    ValueLabel=learnedWordsCount.ToString(),
+                    Color = learned,
+                    ValueLabelColor = learned
+                },
+                new ChartEntry(inProcessWordsCount) {
                     Label="InProcess",
-                    ValueLabel=inProcessCount.ToString(),
-                    Color = SKColor.Parse("#FFB74A"),
-                    ValueLabelColor = SKColor.Parse("#FFB74A") },
+                    ValueLabel=inProcessWordsCount.ToString(),
+                    Color = inProcess,
+                    ValueLabelColor = inProcess
+                },
                 new ChartEntry(notLearnedCount) {
                     Label="Not learned",
                     ValueLabel=notLearnedCount.ToString(),
-                    Color = SKColor.Parse("#FB5656"),
-                    ValueLabelColor = SKColor.Parse("#FB5656")}
+                    Color = notLearned,
+                    ValueLabelColor = notLearned
+                }
             };
         }
     }
 }
-

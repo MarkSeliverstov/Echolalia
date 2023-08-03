@@ -89,11 +89,12 @@
                     </SwipeItems>
                     </SwipeView.RightItems>
 
-                    <StackLayout x:DataType="local:Item" BackgroundColor="White">
+                    <StackLayout x:DataType="local:Word"
+                                 BackgroundColor="White">
                     <Grid ColumnSpacing="10">
 
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
+                            <RowDefinition Height="40"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -113,6 +114,7 @@
                                 TextColor="#5C5C5C"
                                 Text="{Binding Translation}"
                                 HorizontalOptions="Center"
+                                VerticalOptions="Center"
                                 Margin="0,5,10,5"/>
 
                     </Grid>

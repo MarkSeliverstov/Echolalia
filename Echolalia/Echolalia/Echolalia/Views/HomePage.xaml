@@ -24,7 +24,7 @@
             <Button Text="Learn new"
                     BackgroundColor="{StaticResource MyGreen}"
                     Command="{Binding LearnNewWordsCmd}"/>
-            <Button Text="Choosing"
+            <Button Text="Select"
                     BackgroundColor="{StaticResource MyBlue}"
                     Command="{Binding ChoosingWordsCmd}"/>
             <Button Text="Writing"

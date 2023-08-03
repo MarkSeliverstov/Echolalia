@@ -7,19 +7,13 @@ namespace Echolalia.ViewModels
 {
     public class AddViewModel : BaseViewModel
     {
-        public string Title { get; }
-        public string AddWordBtnTitle { get; }
-
-        string _originalWord = null;
+        string _originalWord;
         public string EntryOriginalWord {
             get => _originalWord;
-            set {
-                _originalWord = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _originalWord, value);
         }
 
-        string _translationWord = null;
+        string _translationWord;
         public string EntryTranslationWord {
             get => _translationWord;
             set => SetProperty(ref _translationWord, value);
@@ -29,32 +23,29 @@ namespace Echolalia.ViewModels
         public AddViewModel()
         {
             Title = "Add to Dictionary";
-            AddWordBtnTitle = "Add";
             AddWord = new Command(ExecuteAddWordCmd);
         }
 
         public async void ExecuteAddWordCmd()
         {
 
-            if (EntryOriginalWord == null || EntryOriginalWord == "" ||
-                EntryTranslationWord == null || EntryTranslationWord == "")
+            if (string.IsNullOrWhiteSpace(EntryOriginalWord) ||
+                string.IsNullOrWhiteSpace(EntryTranslationWord))
             {
-                await ShowAlertAsync("Word and translation can't be empty");
+                await Shell.Current.DisplayAlert("Echolaia",
+                    "Word and translation can't be empty",
+                    "Ok"
+                );
                 return;
             }
-            await App.localDB.SaveItem(new Item
+            await App.localDB.SaveItemAsync(new Word
             {
-                progress = LearningProgress.unknown,
-                Original = EntryOriginalWord,
-                Translation = EntryTranslationWord
+                Progress = LearningProgress.unknown,
+                Original = EntryOriginalWord.Trim(),
+                Translation = EntryTranslationWord.Trim()
             });
             EntryOriginalWord = null;
             EntryTranslationWord = null;
-        }
-
-        public async Task ShowAlertAsync(string msg)
-        {
-            await Shell.Current.DisplayAlert("Echolaia", msg, "Ok");
         }
     }
 }

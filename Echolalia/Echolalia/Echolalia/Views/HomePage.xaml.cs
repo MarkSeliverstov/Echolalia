@@ -14,6 +14,14 @@ namespace Echolalia.Views
             InitializeComponent();
 			this.BindingContext = new HomeViewModel();
 		}
+
+        // Invoked when the page is about to be displayed.
+        // To download up-to-date data
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            (BindingContext as HomeViewModel).GetCountOfWordsPracticedTodayAsync();
+        }
     }
 }
 

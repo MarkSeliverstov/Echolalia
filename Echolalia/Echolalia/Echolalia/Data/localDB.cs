@@ -1,42 +1,40 @@
-﻿using System;
-using SQLite;
+﻿using SQLite;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Echolalia.Models;
-using System.IO;
+using System;
 
 namespace Echolalia.Data
 {
-    // https://codetraveler.io/2019/11/26/efficiently-initializing-sqlite-database/ - guide
-
-    public class localDB
+    public class LocalDB
     {
         readonly SQLiteAsyncConnection _database;
 
-        public localDB(string dbPath)
+        public LocalDB(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
             CreateTables();
         }
 
+        public void Init()
+        {
+            return;
+        }
+
         private async void CreateTables()
         {
-            await _database.CreateTableAsync<Item>();
+            await _database.CreateTableAsync<Word>();
         }
 
-        public Task<List<Item>> GetItemsAsync() => _database.Table<Item>().ToListAsync();
+        public Task<List<Word>> GetItemsAsync() => _database.Table<Word>().ToListAsync();
 
-        public Task<int> EditItem(Item currentItem) => _database.UpdateAsync(currentItem);
+        public Task<int> EditItemAsync(Word currentItem) => _database.UpdateAsync(currentItem);
 
-        public Task<int> SaveItem<T>(T item) => _database.InsertAsync(item);
+        public Task<int> SaveItemAsync<T>(T item) => _database.InsertAsync(item);
 
-        public Task<int> RemoveItem(Item item) => _database.DeleteAsync(item);
+        public Task<int> RemoveItemAsync(Word item) => _database.DeleteAsync(item);
 
-        public Task<int> ClearAllData()
-        {
-            return _database.DeleteAllAsync<Item>();
-        }
+        public Task<int> ClearAllDataAsync() => _database.DeleteAllAsync<Word>();
 
     }
 }
-

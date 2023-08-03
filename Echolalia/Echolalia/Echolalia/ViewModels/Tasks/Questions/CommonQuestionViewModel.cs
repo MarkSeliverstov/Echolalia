@@ -8,13 +8,12 @@ namespace Echolalia.ViewModels.Tasks.Questions
 {
     public class CommonQuestionViewModel : BaseQuestionViewModel
     {
-		public CommonQuestionViewModel(){ }
-
-        public async override Task<List<Item>> GetListForGeneratingQuestion()
+        // Returns all of words
+        public async override Task<List<Word>> GetListForGeneratingQuestion()
         {
             var response = await App.localDB.GetItemsAsync();
             var wordsInProcess = response.Where(
-                (item) => item.progress >= LearningProgress.unknown
+                (item) => item.Progress >= LearningProgress.unknown
             ).ToList();
 
             return wordsInProcess;

@@ -2,17 +2,14 @@
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Collections.Generic;
-using Echolalia.Helpers;
+using Echolalia.Data;
+using System.Linq;
 
 namespace Echolalia.ViewModels
 {
 	public class SettingsViewModel: BaseViewModel
     {
-        /*
-            Bindings
-         */
-        public string Title { get; }
-		public string UserName { get => Preferences.Get(SettingKeys.UserName_Key, "User"); }
+		public string UserName { get; }
 		public List<int> CountWordsPerTrainList { get; }
 		public List<string> LanguagesList { get; }
 
@@ -42,41 +39,41 @@ namespace Echolalia.ViewModels
 
         public SettingsViewModel()
 		{
-            CountWordsPerTrainList = new List<int> { 10, 15, 20 };
-            LanguagesList = new List<string> { "English", "Czech" };
-
             Title = "Settings";
+            
+            UserName = App.preferencesDB.UserName;
+
+            CountWordsPerTrainList = App.preferencesDB.WordsCountPerTrainList;
+            LanguagesList = Enum.GetValues(typeof(Languages))
+                                .Cast<Languages>()
+                                .Select(v => v.ToString())
+                                .ToList();
+
+            SelectedCountWordsPerTrainIndex = CountWordsPerTrainList.IndexOf(App.preferencesDB.WordsCountPerTrain);
+            SelectedLanguageIndex = LanguagesList.IndexOf(App.preferencesDB.InterfaceLanguage);
+
+            Console.WriteLine(App.preferencesDB.WordsCountPerTrain);
+            Console.WriteLine(App.preferencesDB.InterfaceLanguage);
+
             DeleteAllDataCmd = new Command(DeleteAllData);
             ConfirmCmd = new Command(Confirm);
-
-            SelectedCountWordsPerTrainIndex = CountWordsPerTrainList.IndexOf(
-                Preferences.Get(SettingKeys.wordsCountPerTrain_Key, CountWordsPerTrainList[0])
-            );
-            SelectedLanguageIndex = LanguagesList.IndexOf(
-                Preferences.Get(SettingKeys.InterfaceLanguage_key, LanguagesList[0])
-            );
         }
 
         public async void DeleteAllData()
         {
-            await App.localDB.ClearAllData();
+            await App.localDB.ClearAllDataAsync();
             await Shell.Current.DisplayAlert("Data cleared", null, "ok");
-            Preferences.Clear();
+            App.preferencesDB.Clear();
+            Confirm();
         }
 
         public void Confirm()
         {
-            Preferences.Set(
-                SettingKeys.wordsCountPerTrain_Key,
-                CountWordsPerTrainList[SelectedCountWordsPerTrainIndex]
-            );
-            Preferences.Set(
-                SettingKeys.InterfaceLanguage_key,
-                LanguagesList[SelectedLanguageIndex]
-            );
+            App.preferencesDB.WordsCountPerTrain = CountWordsPerTrainList[SelectedCountWordsPerTrainIndex];
+            App.preferencesDB.InterfaceLanguage = LanguagesList[SelectedLanguageIndex];
 
             if (EntryCellUserName != null && EntryCellUserName != "")
-                Preferences.Set(SettingKeys.UserName_Key, EntryCellUserName);
+                App.preferencesDB.UserName = EntryCellUserName;
 
             App.Current.MainPage.Navigation.PopAsync();
         }

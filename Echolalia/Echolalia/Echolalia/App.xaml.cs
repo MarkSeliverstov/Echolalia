@@ -10,27 +10,30 @@ namespace Echolalia
 {
     public partial class App : Application
     {
-        static localDB db;
+        // SQLite database connection: local.db3
+        static LocalDB db;
 
-        public static localDB localDB
+        public static LocalDB localDB
         {
             get
             {
                 if (db == null)
                 {
-                    db = new localDB(Path.Combine(
+                    db = new LocalDB(Path.Combine(
                         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                        "local.db3"));
+                        "locall.db3"));
                 }
 
                 return db;
             }
         }
 
+        public static PreferencesDB preferencesDB = new PreferencesDB();
+
         public App ()
         {
             InitializeComponent();
-
+            localDB.Init();
             MainPage = new AppShell();
         }
 

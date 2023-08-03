@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Input;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Echolalia.ViewModels.Tasks
 {
@@ -16,12 +14,12 @@ namespace Echolalia.ViewModels.Tasks
 
 		public ResultsPageViewModel(int rightAnswersCount, int questionCount)
 		{
-            LabelOfResult = "Good Job!";
+            LabelOfResult = $"Good Job, {App.preferencesDB.UserName}!";
             Result = $"{rightAnswersCount} / {questionCount}";
-            HomeCmd = new Command(PerformHomeCmd);
+            HomeCmd = new Command(PerformHomeCmdAsync);
 		}
 
-        private async void PerformHomeCmd()
+        private async void PerformHomeCmdAsync()
         {
             await Shell.Current.Navigation.PopToRootAsync();
         }

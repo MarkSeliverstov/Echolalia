@@ -13,6 +13,8 @@ namespace Echolalia.Views
             this.BindingContext = new DictionaryViewModel();
         }
 
+        // Invoked when the page is about to be displayed.
+        // To download up-to-date data
         protected override void OnAppearing()
         {
             base.OnAppearing();

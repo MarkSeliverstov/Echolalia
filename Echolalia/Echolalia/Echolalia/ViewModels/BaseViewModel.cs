@@ -1,19 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-/*
- * DRY: Implemented base INotifyPropertyChanged class. 
- * 
- * A base class and some methods to be used on each ViewModel 
- * Property facilitating its use and repeating less code
- */
 
 namespace Echolalia.ViewModels
 {
+    /*
+     * DRY: Implemented base INotifyPropertyChanged class. 
+     * 
+     * A base class and some methods to be used on each ViewModel 
+     * Property facilitating its use and repeating less code
+     */
     public class BaseViewModel: INotifyPropertyChanged
     {
+        private string _title;
+        public string Title
+        {
+            get => _title;
+            set => SetProperty(ref _title, value);
+        }
+
+        /*
+         * From: https://onewindowsdev.com/2017/07/21/basic-mvvm-base-class-inotifypropertychanged-implementation/
+         */
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

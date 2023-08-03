@@ -1,24 +1,23 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Echolalia.ViewModels.Tasks.Questions;
-using Xamarin.Forms;
 
 namespace Echolalia.ViewModels.Tasks
 {
     public class LearningTaskViewModel : TaskPageViewModel
     {
-        public override Command CheckAnswerCmd { get; }
+        public LearningTaskViewModel(BaseQuestionViewModel questionContext) : base(questionContext){}
 
-        public LearningTaskViewModel(BaseQuestionViewModel questionContext) : base(questionContext)
+        // This page doesn't have answers but
+        public override Task GenerateRandomAnswers()
         {
-            CheckAnswerCmd = new Command(CheckAnswer);
+            return Task.CompletedTask;
         }
 
-        public override void CheckAnswer()
+        // All of answers must be right to count the learning
+        public override void CheckAnswer(string userAnswer)
         {
-            UserAnswer = QuestionContext.Answer;
+            UserAnswer = userAnswer;
             QuestionContext.ShowAnswer(true);
-
             UpdateControlls();
         }
     }

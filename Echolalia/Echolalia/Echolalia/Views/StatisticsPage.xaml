@@ -7,7 +7,7 @@
     xmlns:vm="clr-namespace:Echolalia.ViewModels"
     x:DataType="vm:StatisticsViewModel"
     Background="{StaticResource Background}"
-    Title="{Binding Title}"
+    Title="Statistics"
     Shell.NavBarIsVisible="true">
 
     <ContentPage.Content>
@@ -15,16 +15,9 @@
         <StackLayout Margin="20">
             <Frame>
                 <StackLayout Spacing="10">
-                    <Label Text="Statistics"
-                           FontSize="20"
-                           FontAttributes="Bold"
-                           Margin="0,0,0,20"/>
-
-                    <Line BackgroundColor="#5C5C5C" HeightRequest="1"/>
                     <Label Text="Words learned"
                            FontSize="14"
-                           FontAttributes="Bold"
-                           Margin="0, 40, 0, 0"/>
+                           FontAttributes="Bold"/>
                     <microcharts:ChartView Chart="{Binding DonutLearnedChart}" HeightRequest="150"/>
                 </StackLayout>
             </Frame>

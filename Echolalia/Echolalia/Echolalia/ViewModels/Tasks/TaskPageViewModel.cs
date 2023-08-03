@@ -9,12 +9,13 @@ namespace Echolalia.ViewModels.Tasks
 {
 	public abstract class TaskPageViewModel: BaseViewModel
     {
-        protected string UserAnswer;
+        // Elements that must implemented by each task
+        public abstract Task GenerateRandomAnswers();
 
-        int rightAnswersCount;
-
-        public abstract Command CheckAnswerCmd { get; }
+        // Properties
+        public Command ShowAnswerCmd { get; }
         public Command SubmitAnswerCmd { get; }
+        public BaseQuestionViewModel QuestionContext { get; set; }
 
         private bool isVisibleSubmitAnswerBtn;
         public bool IsVisibleSubmitAnswerBtn
@@ -36,76 +37,81 @@ namespace Echolalia.ViewModels.Tasks
             set => SetProperty(ref isVisibleShowAnswerBtn, value);
         }
 
-        private string _title;
-        public string Title
-        {
-            get => _title;
-            set => SetProperty(ref _title, value);
-        }
+        // Base data
+        protected string UserAnswer;
+        protected int rightAnswersCount;
 
-        public BaseQuestionViewModel QuestionContext { get; set; }
-
+        // Constructor
         public TaskPageViewModel( BaseQuestionViewModel questionContext){
-            rightAnswersCount = 0;
-            //this.Title = Title;
 
+            rightAnswersCount = 0;
             IsVisibleAnswers = true;
             IsVisibleShowAnswerBtn = true;
             IsVisibleSubmitAnswerBtn = false;
 
             QuestionContext = questionContext;
+            ShowAnswerCmd = new Command(ShowAnswer);
             SubmitAnswerCmd = new Command(SubmitAnswer);
 
             GenerateContext();
         }
 
+        // Updates the title showing the count of questions
+        void UpdateTitle()
+        {
+            this.Title = QuestionContext.GetCurrentQuestionNumber().ToString() + " / " +
+                         QuestionContext.GetQuestionCount().ToString();
+        }
+
         async void GenerateContext()
         {
             await QuestionContext.GenerateRandomQuestions();
+            // Generates random answer if necessary
+            await GenerateRandomAnswers();
+            UpdateTitle();
         }
 
+        // From answered view to submit answer view and and on the contrary.
         protected void UpdateControlls()
         {
             IsVisibleSubmitAnswerBtn = IsVisibleShowAnswerBtn;
             IsVisibleShowAnswerBtn = !IsVisibleSubmitAnswerBtn;
             IsVisibleAnswers = IsVisibleShowAnswerBtn;
         }
-        
-        void SubmitAnswer()
+
+        // Submit one answered question
+        public async void SubmitAnswer()
         {
-            if (QuestionContext.Answer == UserAnswer)
+            Word currentQuestionWord = QuestionContext.GetCurrentQuestionWord();
+
+            if (currentQuestionWord.Translation == UserAnswer)
             {
                 rightAnswersCount++;
-                Item currentItem = QuestionContext.GetCurrentItem();
-                if (currentItem.progress < Models.LearningProgress.learned)
+                if (currentQuestionWord.Progress < LearningProgress.learned)
                 {
-                    currentItem.progress++;
+                    currentQuestionWord.Progress++;
                 }
-                currentItem.LastPracticed = DateTime.Today;
-                App.localDB.EditItem(currentItem);
             }
-            else
-            {
-                Item currentItem = QuestionContext.GetCurrentItem();
-                if (currentItem.progress > Models.LearningProgress.unknown)
-                {
-                    currentItem.progress--;
-                }
-                currentItem.LastPracticed = DateTime.Today;
-                App.localDB.EditItem(currentItem);
+            else if (currentQuestionWord.Progress > LearningProgress.unknown){
+                    currentQuestionWord.Progress--;
             }
 
-            if (QuestionContext.GetCurrentQustion()+1 == QuestionContext.GetQuestionCount())
+            currentQuestionWord.LastPracticed = DateTime.Today;
+            await App.localDB.EditItemAsync(currentQuestionWord);
+
+            if (QuestionContext.GetCurrentQuestionNumber() == QuestionContext.GetQuestionCount())
             {
                 SubmitResult();
                 return;
             }
 
-
             QuestionContext.NextQuestion();
+            await GenerateRandomAnswers();
             UpdateControlls();
+            UpdateTitle();
         }
 
+        // Submit all answered question
         async void SubmitResult()
         {
             await Shell.Current.Navigation.PushAsync(new ResultsPage(
@@ -114,15 +120,19 @@ namespace Echolalia.ViewModels.Tasks
             );
         }
 
-        public virtual void CheckAnswer()
+        // Checks user answers and you can rewrite it in child classes
+        public virtual void CheckAnswer(string userAnswer)
         {
-            bool isCorrect = false;
-            if (UserAnswer != null)
-            {
-                isCorrect = (QuestionContext.Answer.ToLower().Trim() == UserAnswer.ToLower().Trim());
-            }
-
+            UserAnswer = userAnswer;
+            bool isCorrect = (QuestionContext.Answer.ToLower() == userAnswer.ToLower());
             QuestionContext.ShowAnswer(isCorrect);
+            UpdateControlls();
+        }
+
+        // Implements show button action
+        public void ShowAnswer()
+        {
+            QuestionContext.ShowAnswer();
             UpdateControlls();
         }
     }

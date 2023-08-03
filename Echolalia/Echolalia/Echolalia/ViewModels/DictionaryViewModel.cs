@@ -1,30 +1,24 @@
 ﻿using Echolalia.Models;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
-using System.Threading.Tasks;
 using Echolalia.Views;
+using System.Collections.Generic;
 
 namespace Echolalia.ViewModels
 {
     public class DictionaryViewModel : BaseViewModel
     {
-
-        public string Title { get; }
-        public ObservableCollection<Item> Translations {get; set;}
+        /* 
+         * ObservableCollection<T> is a generic class in C# 
+         * that is part of the System.Collections.ObjectModel namespace. 
+         * It is a collection class that provides notifications whenever items 
+         * are added, removed, or when the collection is refreshed.
+         */
+        public ObservableCollection<Word> Translations {get; set;}
 
         public Command RefreshCmdAsync { get; }
         public Command DeleteItemCmdAsync { get;  }
         public Command EditItemCmdAsync { get;  }
-
-        public DictionaryViewModel()
-        {
-            Title = "My Dictionary";
-            Translations = new ObservableCollection<Item>();
-
-            RefreshCmdAsync = new Command(RefrechAsync);
-            DeleteItemCmdAsync = new Command(async (sender) => await DeleteItemAsync(sender));
-            EditItemCmdAsync = new Command(async (sender) => await EditItem(sender));
-        }
 
         int _wordCount;
         public int WordCount
@@ -33,12 +27,24 @@ namespace Echolalia.ViewModels
             set => SetProperty(ref _wordCount, value);
         }
 
+        // Shows if it is Refreshing
         bool _isBusy;
         public bool IsBusy
         {
             get => _isBusy;
             set => SetProperty(ref _isBusy, value);
         }
+
+        public DictionaryViewModel()
+        {
+            Title = "My Dictionary";
+            Translations = new ObservableCollection<Word>();
+
+            RefreshCmdAsync = new Command(RefrechAsync);
+            DeleteItemCmdAsync = new Command(DeleteItemAsync);
+            EditItemCmdAsync = new Command(EditItem);
+        }
+
 
         private void RefrechAsync()
         {
@@ -47,30 +53,30 @@ namespace Echolalia.ViewModels
             IsBusy = false;
         }
 
-        private async Task DeleteItemAsync(object o)
+        private async void DeleteItemAsync(object o)
         {
-            var item = o as Item;
-            if (item == null) return;
+            if (o is not Word item) return;
+
             Translations.Remove(item);
             WordCount--;
-            await App.localDB.RemoveItem(item);
+
+            await App.localDB.RemoveItemAsync(item);
         }
 
-        private async Task EditItem(object o)
+        private async void EditItem(object o)
         {
-            var item = o as Item;
-            if (item == null) return;
+            if (o is not Word item) return;
+
             await Shell.Current.Navigation.PushAsync(new EditSelected(item));
         }
 
         private async void LoadTranslations()
         {
             Translations.Clear();
-            var result = await App.localDB.GetItemsAsync();
-            foreach (Item i in result)
-            {
-                Translations.Add(i);
-            }
+
+            List<Word> result = await App.localDB.GetItemsAsync();
+            result.ForEach(Translations.Add);
+
             WordCount = Translations.Count;
         }
     }

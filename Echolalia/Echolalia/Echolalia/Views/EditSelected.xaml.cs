@@ -9,7 +9,7 @@ namespace Echolalia.Views
 {	
 	public partial class EditSelected : ContentPage
 	{	
-		public EditSelected (Item item)
+		public EditSelected (Word item)
 		{
 			InitializeComponent ();
 			this.BindingContext = new EditSelectedViewModel(item);

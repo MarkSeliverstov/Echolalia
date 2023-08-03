@@ -1,65 +1,59 @@
 ﻿using System;
 using Xamarin.Forms;
-using Echolalia.Views;
 using Echolalia.ViewModels.Tasks.Questions;
 using Echolalia.Views.Tasks;
 using System.Linq;
+using SQLite;
 
 namespace Echolalia.ViewModels
 {
 	public class HomeViewModel: BaseViewModel
     {
-
-		public string Title { get;  }
 		public Command LearnNewWordsCmd { get;  }
 		public Command ChoosingWordsCmd { get;  }
 		public Command WritingWordsCmd { get;  }
 
         private string countPracticeWordToday;
-        public string CountPracticeWordToday { get => countPracticeWordToday; set => SetProperty(ref countPracticeWordToday, value); }
+        public string CountPracticeWordToday {
+            get => countPracticeWordToday;
+            set => SetProperty(ref countPracticeWordToday, value);
+        }
 
         public HomeViewModel ()
 		{
 			Title = "Home";
-            LearnNewWordsCmd = new Command(LearnNewWords);
-            ChoosingWordsCmd = new Command(ChoosingWords);
-            WritingWordsCmd = new Command(WritingWords);
             CountPracticeWordToday = "0";
-            GetCountOfWordsPracticedToday();
+
+            LearnNewWordsCmd = new Command(LearnNewWordsAsync);
+            ChoosingWordsCmd = new Command(ChoosingWordsAsync);
+            WritingWordsCmd = new Command(WritingWordsAsync);
 		}
 
-        private async void GetCountOfWordsPracticedToday()
+        // For OnAppearing method to invoked when the page
+        // is about to be displayed.
+        public async void GetCountOfWordsPracticedTodayAsync()
         {
             var data = await App.localDB.GetItemsAsync();
-            var result = data.Where((item) => item.LastPracticed == DateTime.Today);
+            var result = data.Where(
+                (item) => item.LastPracticed == DateTime.Today
+            );
+
             CountPracticeWordToday = result.Count().ToString();
         }
 
-        private async void WritingWords()
-        {
-            GetCountOfWordsPracticedToday();
-            await Shell.Current.Navigation.PushAsync(
-                new EntryTaskPage(new CommonQuestionViewModel())
-            );
-        }
-
-        async void LearnNewWords()
-		{
-            GetCountOfWordsPracticedToday();
+        async void LearnNewWordsAsync() =>
             await Shell.Current.Navigation.PushAsync(
                 new LearningTaskPage(new LearningQuestionViewModel())
             );
-        }
 
-        async void ChoosingWords()
-        {
-            GetCountOfWordsPracticedToday();
+        async void ChoosingWordsAsync() =>
             await Shell.Current.Navigation.PushAsync(
                 new ChoosingTaskPage(new CommonQuestionViewModel())
             );
-        }
 
+        async void WritingWordsAsync() =>
+            await Shell.Current.Navigation.PushAsync(
+                new WritingTaskPage(new CommonQuestionViewModel())
+            );
     }
 }
-
-

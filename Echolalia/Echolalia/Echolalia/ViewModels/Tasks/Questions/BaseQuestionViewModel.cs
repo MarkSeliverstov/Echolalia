@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Echolalia.Helpers;
 using Echolalia.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -12,14 +11,11 @@ namespace Echolalia.ViewModels.Tasks.Questions
 {
 	public abstract class BaseQuestionViewModel: BaseViewModel
     {
-        public abstract Task<List<Item>> GetListForGeneratingQuestion();
+        public abstract Task<List<Word>> GetListForGeneratingQuestion();
 
         /*
          * Propetries
          */
-        private Item CurrentItem;
-        public Item GetCurrentItem() => CurrentItem;
-
         private string _question;
         public string Question
         {
@@ -48,31 +44,37 @@ namespace Echolalia.ViewModels.Tasks.Questions
             set => SetProperty(ref _isVisibleAnswer, value);
         }
 
-        /*
-         * Base Data
-         */
-        Color greenColor = Color.FromHex("#46C931");
-        Color redcolor = Color.FromHex("#FB5656");
+        // Base DAta
+        int questionCount = App.preferencesDB.WordsCountPerTrain;
+        readonly Color greenColor = Color.FromHex("#46C931");
+        readonly Color redColor = Color.FromHex("#FB5656");
+        readonly Color yellowColor = Color.FromHex("#FFB74A");
 
-        public List<Item> generatedQuestions = new List<Item>();
-        protected int currentQuestionIndex = 0;
-        int questionCount = Preferences.Get(
-                SettingKeys.wordsCountPerTrain_Key, 10
-        );
+        List<Word> generatedQuestions = new List<Word>();
+        private Word CurrentItem;
+        int currentQuestionIndex = 0;
 
-        public int GetCurrentQustion() => currentQuestionIndex;
-        public int GetQuestionCount() => questionCount;
-
-       /*
-        * Constructor
-        */
+        // Constructor
         public BaseQuestionViewModel(){
             IsVisibleAnswer = false;
         }
 
+        private void ChangeQuestionAndAnswer()
+        {
+            CurrentItem = generatedQuestions[currentQuestionIndex];
+            Question = CurrentItem.Translation;
+            Answer = CurrentItem.Original;
+        }
+
+        // Public Question context API
+        public Word GetCurrentQuestionWord() => CurrentItem;
+        public int GetCurrentQustionIndex() => currentQuestionIndex;
+        public int GetCurrentQuestionNumber() => currentQuestionIndex + 1;
+        public int GetQuestionCount() => questionCount;
+
         public async Task GenerateRandomQuestions()
         {
-            List<Item> from = await GetListForGeneratingQuestion();
+            List<Word> from = await GetListForGeneratingQuestion();
 
             if (from.Count() <= 0)
             {
@@ -89,10 +91,10 @@ namespace Echolalia.ViewModels.Tasks.Questions
             {
                 Random rnd = new Random();
 
-                while (generatedQuestions.Count() < 20)
+                while (generatedQuestions.Count() < questionCount)
                 {
                     int randIndex = rnd.Next(from.Count());
-                    Item question = from[randIndex];
+                    Word question = from[randIndex];
                     generatedQuestions.Add(question);
                     from.Remove(question);
                 }
@@ -101,12 +103,6 @@ namespace Echolalia.ViewModels.Tasks.Questions
             ChangeQuestionAndAnswer();
         }
 
-        private void ChangeQuestionAndAnswer()
-        {
-            CurrentItem = generatedQuestions[currentQuestionIndex];
-            Question = CurrentItem.Translation;
-            Answer = CurrentItem.Original;
-        }
 
         public void NextQuestion()
         {
@@ -117,7 +113,13 @@ namespace Echolalia.ViewModels.Tasks.Questions
 
         public void ShowAnswer(bool isCorrect)
         {
-            AnswerColor = isCorrect ? greenColor : redcolor;
+            AnswerColor = isCorrect ? greenColor : redColor;
+            IsVisibleAnswer = true;
+        }
+
+        public void ShowAnswer()
+        {
+            AnswerColor = yellowColor;
             IsVisibleAnswer = true;
         }
     }

@@ -1,5 +1,5 @@
 ﻿using System;
-using static SQLite.SQLite3;
+
 using Xamarin.Forms;
 
 namespace Echolalia.ViewModels.Tasks

@@ -7,13 +7,12 @@ namespace Echolalia.ViewModels.Tasks.Questions
 {
 	public class LearningQuestionViewModel: BaseQuestionViewModel
 	{
-        public LearningQuestionViewModel() { }
-
-        public override async Task<List<Item>> GetListForGeneratingQuestion()
+        // Just returns only words to be learned
+        public override async Task<List<Word>> GetListForGeneratingQuestion()
         {
             var response = await App.localDB.GetItemsAsync();
             var unknownedWords = response.Where(
-                (item) => item.progress == LearningProgress.unknown
+                (item) => item.Progress == LearningProgress.unknown
             ).ToList();
 
             return unknownedWords;

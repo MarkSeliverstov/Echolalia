@@ -18,7 +18,7 @@
 
                     <Entry Text="{Binding EntryOriginalWord}"
                            TextColor="Black"/>
-                    <Label Text="word/phrase/sentence"
+                    <Label Text="word"
                            FontSize="16"
                            HorizontalOptions="Center"/>
 
@@ -29,7 +29,7 @@
                            HorizontalOptions="Center"/>
 
                     <Button Command="{Binding AddWord}"
-                            Text="{Binding AddWordBtnTitle}"
+                            Text="Add"
                             BackgroundColor="{StaticResource MyGreen}"
                             Margin="0,20,0,0"/>
                 </StackLayout>

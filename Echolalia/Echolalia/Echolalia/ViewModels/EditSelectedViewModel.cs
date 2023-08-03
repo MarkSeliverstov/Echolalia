@@ -1,59 +1,39 @@
-﻿using System;
-using System.Threading.Tasks;
-using Echolalia.Models;
+﻿using Echolalia.Models;
 using Xamarin.Forms;
 
 namespace Echolalia.ViewModels
 {
-	public class EditSelectedViewModel: BaseViewModel
+    public class EditSelectedViewModel : BaseViewModel
     {
-		public string Title { get; }
+        public string EntryOriginalWord { get; set; }
+        public string EntryTranslationWord { get; set; }
+        public Command EditWordCMD { get; }
 
-        string _originalWord = null;
-        public string EntryOriginalWord
+        public EditSelectedViewModel(Word item)
         {
-            get => _originalWord;
-            set => SetProperty(ref _originalWord, value);
+            Title = "Edit";
+            EntryOriginalWord = item.Original;
+            EntryTranslationWord = item.Translation;
+            EditWordCMD = new Command(() => EditWord(item));
         }
 
-        string _translationWord = null;
-        public string EntryTranslationWord
+        private async void EditWord(Word item)
         {
-            get => _translationWord;
-            set => SetProperty(ref _translationWord, value);
-        }
-
-        public Command EditWordCMD { get;  }
-
-        public EditSelectedViewModel(Item item)
-		{
-			Title = "Edit";
-			EntryOriginalWord = item.Original;
-			EntryTranslationWord = item.Translation;
-
-			EditWordCMD = new Command(() => EditWord(item));
-		}
-
-		private async void EditWord(Item item)
-		{
-			if (EntryOriginalWord == null || EntryOriginalWord == "" ||
-                EntryTranslationWord == null || EntryTranslationWord == "")
+            if (string.IsNullOrWhiteSpace(EntryOriginalWord) ||
+                string.IsNullOrWhiteSpace(EntryTranslationWord))
             {
-                await ShowAlertAsync("Word and translation can't be empty");
+                await Shell.Current.DisplayAlert(
+                    "Echolalia",
+                    "Word and translation can't be empty",
+                    "Ok"
+                );
                 return;
             }
-            else
-            {
-                item.Original = EntryOriginalWord;
-                item.Translation = EntryTranslationWord;
-                await App.localDB.EditItem(item);
-                await App.Current.MainPage.Navigation.PopAsync();
-            }
-		}
 
-        public async Task ShowAlertAsync(string msg)
-        {
-            await Shell.Current.DisplayAlert("Echolaia", msg, "Ok");
+            item.Original = EntryOriginalWord.Trim();
+            item.Translation = EntryTranslationWord.Trim();
+            await App.localDB.EditItemAsync(item);
+            await App.Current.MainPage.Navigation.PopAsync();
         }
     }
 }
