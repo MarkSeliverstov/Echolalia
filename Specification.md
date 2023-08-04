@@ -18,10 +18,9 @@ In summary, this specification aims to create a user-friendly words learning app
 
 ## The main goals
 
-- Create backend for app on the server
+- Create a mobile application for mobiles
+- Create backend in the Xamarin
 - Create frontend and main functionality in the Xamarin
-- Implement Authentication
-- Connect backend and frontend
 
 Using an external server will allow users to synchronize their data between devices and not lose it when reinstalling the application.
 Server will be hosted on the school server.
@@ -30,8 +29,7 @@ Server will be hosted on the school server.
 
 ### User Registration and Authentication
 
-- Ability to create an account
-- Ability to log in to the system using an email/login and password
+- Ability to create and edit an account
 
 ### User Profile
 
@@ -44,7 +42,6 @@ Server will be hosted on the school server.
 - Ability to add your own words
 - Ability to take existing words or phrases from the server database
 - Ability to practice skills through exercises and tests
-
 ### Exercises
 
 - Repeating words - translation from the foreign language to the native language (choice)
@@ -84,7 +81,6 @@ Server will be hosted on the school server.
 - Development using Xamarin and the C# programming language.
 - Using the SQLite database for storing.
 - Using the ASP.NET Core Web API for the server side.
-- Using the school server for hosting the database and the Web API.
 - Using the Figma for design.
 
 ## Expected Database Structure

@@ -42,7 +42,9 @@ namespace Echolalia.ViewModels
             {
                 Progress = LearningProgress.unknown,
                 Original = EntryOriginalWord.Trim(),
-                Translation = EntryTranslationWord.Trim()
+                Translation = EntryTranslationWord.Trim(),
+                IsAddedByUser = true,
+                IsFavorite = false
             });
             EntryOriginalWord = null;
             EntryTranslationWord = null;

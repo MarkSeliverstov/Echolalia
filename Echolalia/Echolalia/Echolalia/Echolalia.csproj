@@ -7,6 +7,13 @@
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <LangVersion>10.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <LangVersion>10.0</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.7.7" />

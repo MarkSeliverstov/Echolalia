@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using Echolalia.ViewModels.Tasks.Questions;
 using Xamarin.Forms;
 using System.Collections.Generic;

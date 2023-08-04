@@ -13,17 +13,41 @@
             <Frame>
                 <StackLayout Spacing="10">
 
-                    <Entry Text="{Binding EntryOriginalWord}"/>
+                    <StackLayout Orientation="Horizontal">
+                            <Button Command="{Binding MarkAsLearnedCMD}"
+                                    Text="{Binding MarkAsLearnedLabel}"
+                                    BackgroundColor="{StaticResource MyGreen}"
+                                    Margin="0,20,0,0"
+                                    FontSize="12"
+                                    HeightRequest="30"
+                                    WidthRequest="100"
+                                    CornerRadius="10"
+                                    HorizontalOptions="Start"/>
+
+                            <Button Command="{Binding FlipIsFavoriteCMD}"
+                                    Text="*"
+                                    BackgroundColor="{Binding FlipIsFavoriteColor}"
+                                    Margin="0,20,0,0"
+                                    FontSize="30"
+                                    HeightRequest="30"
+                                    WidthRequest="40"
+                                    CornerRadius="10"
+                                    HorizontalOptions="EndAndExpand"/>
+                     </StackLayout>
+                    <Entry Text="{Binding EntryOriginalWord}"
+                           TextColor="Black"/>
                     <Label Text="Edit original word"
                            FontSize="16"
                            HorizontalOptions="Center"/>
 
-                    <Entry Text="{Binding EntryTranslationWord}" Margin="0,20,0,0"/>
+                    <Entry Text="{Binding EntryTranslationWord}"
+                           Margin="0,20,0,0"
+                           TextColor="Black"/>
                     <Label Text="Edit translation"
                            FontSize="16"
                            HorizontalOptions="Center"/>
 
-                    <Button Command="{Binding EditWordCMD}"
+                    <Button Command="{Binding SaveWordCMD}"
                             Text="Save"
                             BackgroundColor="{StaticResource MyGreen}"
                             Margin="0,20,0,0"/>

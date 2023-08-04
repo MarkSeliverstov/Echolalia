@@ -3,7 +3,6 @@ using Xamarin.Forms;
 using Echolalia.ViewModels.Tasks.Questions;
 using Echolalia.Views.Tasks;
 using System.Linq;
-using SQLite;
 
 namespace Echolalia.ViewModels
 {

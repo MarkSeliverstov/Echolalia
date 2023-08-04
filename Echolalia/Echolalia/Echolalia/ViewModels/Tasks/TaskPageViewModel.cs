@@ -84,7 +84,7 @@ namespace Echolalia.ViewModels.Tasks
         {
             Word currentQuestionWord = QuestionContext.GetCurrentQuestionWord();
 
-            if (currentQuestionWord.Translation == UserAnswer)
+            if (currentQuestionWord.Original == UserAnswer)
             {
                 rightAnswersCount++;
                 if (currentQuestionWord.Progress < LearningProgress.learned)
@@ -121,7 +121,7 @@ namespace Echolalia.ViewModels.Tasks
         }
 
         // Checks user answers and you can rewrite it in child classes
-        public virtual void CheckAnswer(string userAnswer)
+        public void CheckAnswer(string userAnswer)
         {
             UserAnswer = userAnswer;
             bool isCorrect = (QuestionContext.Answer.ToLower() == userAnswer.ToLower());
@@ -130,11 +130,10 @@ namespace Echolalia.ViewModels.Tasks
         }
 
         // Implements show button action
-        public void ShowAnswer()
+        public virtual void ShowAnswer()
         {
             QuestionContext.ShowAnswer();
             UpdateControlls();
         }
     }
 }
-

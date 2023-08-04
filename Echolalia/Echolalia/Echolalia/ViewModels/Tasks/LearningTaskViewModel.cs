@@ -14,9 +14,9 @@ namespace Echolalia.ViewModels.Tasks
         }
 
         // All of answers must be right to count the learning
-        public override void CheckAnswer(string userAnswer)
+        public override void ShowAnswer()
         {
-            UserAnswer = userAnswer;
+            UserAnswer = QuestionContext.Answer;
             QuestionContext.ShowAnswer(true);
             UpdateControlls();
         }
