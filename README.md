@@ -19,8 +19,8 @@ Echolalia offers the following key features to facilitate effective language lea
 
 - **User Profile**: Personalised user profiles and user settings.
 - **Dictionary**: Users can add custom words or memorise existing ones.
-- **Exercises**: Various exercises are available to test language skills, including memorisation,       - multiple-choice tasks and practicing words using writing.
-- **Statistics**: Users can view learning statistics in graphical form, helping them monitor their - progress over time.
+- **Exercises**: Various exercises are available to test language skills, including memorisation, multiple-choice tasks and practicing words using writing.
+- **Statistics**: Users can view learning statistics in graphical form, helping them monitor their progress over time.
 - **Settings**: The application offers customisable settings such as changing the language, adjusting exercise word count, and deleting the user account and associated data.
 
 ## Project Goals
