@@ -31,3 +31,5 @@ The primary goals of the Echolalia project include:
 - Creating `frontend` for app in Figma and implement it in Xamarin Forms.
 
 ![Alt text](./src/user-story.png)
+
+Happy Learning with Echolalia!
