@@ -1,5 +1,4 @@
-﻿using System;
-using Microcharts;
+﻿using Microcharts;
 using SkiaSharp;
 using System.Collections.Generic;
 using System.Threading.Tasks;
