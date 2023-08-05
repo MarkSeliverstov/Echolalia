@@ -85,7 +85,7 @@ Server will be hosted on the school server.
   "Original": "string",
   "Translation": "string",
   "isAddedbyUser": "boolean",
-  "Progress": "Learning progress"
+  "Progress": "Learning progress",
   "lastRepetition": "string",
   "LastPracticed": "DateTime",
   "IsFavorite": "boolean",
