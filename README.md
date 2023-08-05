@@ -14,7 +14,6 @@ Echolalia is available for both Android and iOS devices. To install the applicat
 - **iOS:** 
   - You must have an Apple developer key and you must build release it in VS. Or you can use an emulator in VS.
 
-![Alt text](./src/user-story.png)
 ## Features Overview
 Echolalia offers the following key features to facilitate effective language learning:
 
@@ -30,3 +29,5 @@ The primary goals of the Echolalia project include:
 - Creating a mobile application for both `Android` and `iOS` platforms using the *Xamarin framework*.
 - Creating `backend` for app (Tasks, database model, statistics, settings, dictionary).
 - Creating `frontend` for app in Figma and implement it in Xamarin Forms.
+
+![Alt text](./src/user-story.png)
