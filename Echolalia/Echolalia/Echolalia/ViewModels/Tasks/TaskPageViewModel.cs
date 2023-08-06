@@ -155,6 +155,7 @@ namespace Echolalia.ViewModels.Tasks
 
         /// <summary>
         /// Implements the show answer button action.
+        /// You can override this method in child classes if needed.
         /// </summary>
         public virtual void ShowAnswer()
         {
