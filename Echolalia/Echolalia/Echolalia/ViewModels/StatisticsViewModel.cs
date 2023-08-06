@@ -7,9 +7,15 @@ using Echolalia.Models;
 
 namespace Echolalia.ViewModels
 {
-	public class StatisticsViewModel: BaseViewModel
+    /// <summary>
+    /// ViewModel for displaying statistics related to learning progress.
+    /// </summary>
+    public class StatisticsViewModel: BaseViewModel
     {
         DonutChart _donutLearnedChart;
+        /// <summary>
+        /// Gets or sets the DonutChart representing the learned word statistics.
+        /// </summary>
         public DonutChart DonutLearnedChart
         {
             get => _donutLearnedChart;
@@ -32,24 +38,25 @@ namespace Echolalia.ViewModels
             };
         }
 
+        // Colors for different learning progress states
         readonly SKColor learned = SKColor.Parse("#46C931");
         readonly SKColor inProcess = SKColor.Parse("#FFB74A");
         readonly SKColor notLearned = SKColor.Parse("#FB5656");
 
+        /// <summary>
+        /// Asynchronously retrieves the learning progress statistics and returns a list of ChartEntry objects.
+        /// </summary>
+        /// <returns>List of ChartEntry objects representing learning progress statistics.</returns>
         private async Task<List<ChartEntry>> GetStatsAsync()
         {
             var items = await App.localDB.GetItemsAsync();
 
-            int learnedWordsCount = items.Where(
-                (item) => item.Progress == LearningProgress.learned
-            ).Count();
-
-            int inProcessWordsCount = items.Where(
-                (item) => item.Progress == LearningProgress.inProcess
-            ).Count();
-
+            // Calculate the number of learned, in-process, and not learned words
+            int learnedWordsCount = items.Where((item) => item.Progress == LearningProgress.learned).Count();
+            int inProcessWordsCount = items.Where((item) => item.Progress == LearningProgress.inProcess).Count();
             int notLearnedCount = items.Count() - inProcessWordsCount - learnedWordsCount;
 
+            // Create a list of ChartEntry objects to represent the learning progress data
             return new List<ChartEntry>()
             {
                 new ChartEntry(learnedWordsCount) {
@@ -59,7 +66,7 @@ namespace Echolalia.ViewModels
                     ValueLabelColor = learned
                 },
                 new ChartEntry(inProcessWordsCount) {
-                    Label="InProcess",
+                    Label="In process",
                     ValueLabel=inProcessWordsCount.ToString(),
                     Color = inProcess,
                     ValueLabelColor = inProcess

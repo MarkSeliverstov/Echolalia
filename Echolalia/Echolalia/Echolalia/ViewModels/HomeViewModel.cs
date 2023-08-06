@@ -6,7 +6,10 @@ using System.Linq;
 
 namespace Echolalia.ViewModels
 {
-	public class HomeViewModel: BaseViewModel
+    /// <summary>
+    /// ViewModel for managing the home page of the application.
+    /// </summary>
+    public class HomeViewModel: BaseViewModel
     {
 		public Command LearnNewWordsCmd { get;  }
 		public Command ChoosingWordsCmd { get;  }
@@ -28,8 +31,14 @@ namespace Echolalia.ViewModels
             WritingWordsCmd = new Command(WritingWordsAsync);
 		}
 
-        // For OnAppearing method to invoked when the page
-        // is about to be displayed.
+
+        /// <summary>
+        /// Retrieves the count of words practiced today
+        /// and updates the CountPracticeWordToday property
+        ///
+        /// (for OnAppearing method to invoked when the page
+        /// is about to be displayed).
+        /// </summary>
         public async void GetCountOfWordsPracticedTodayAsync()
         {
             var data = await App.localDB.GetItemsAsync();

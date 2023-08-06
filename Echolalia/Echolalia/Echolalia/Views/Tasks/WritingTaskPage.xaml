@@ -16,7 +16,8 @@
             <StackLayout VerticalOptions="EndAndExpand">
                 <StackLayout Orientation="Horizontal"
                              VerticalOptions="EndAndExpand"
-                             Margin="0,0,0,60">
+                             Margin="0,0,0,60"
+                             IsVisible="{Binding IsVisibleShowAnswerBtn}">
 
                     <Entry Text="{Binding EntryUserAnswer}"
                            TextColor="Black"

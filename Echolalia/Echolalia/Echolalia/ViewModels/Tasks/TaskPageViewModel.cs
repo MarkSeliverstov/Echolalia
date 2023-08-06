@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Echolalia.ViewModels.Tasks
 {
-	public abstract class TaskPageViewModel: BaseViewModel
+    /// <summary>
+    /// Abstract base ViewModel for managing task-related pages in the application.
+    /// </summary>
+    public abstract class TaskPageViewModel: BaseViewModel
     {
-        // Elements that must implemented by each task
-        public abstract Task GenerateRandomAnswers();
-
-        // Properties
+        // Properties for commands and visibility control
         public Command ShowAnswerCmd { get; }
         public Command SubmitAnswerCmd { get; }
         public BaseQuestionViewModel QuestionContext { get; set; }
@@ -41,7 +41,10 @@ namespace Echolalia.ViewModels.Tasks
         protected string UserAnswer;
         protected int rightAnswersCount;
 
-        // Constructor
+        /// <summary>
+        /// Initializes a new instance of the TaskPageViewModel class.
+        /// </summary>
+        /// <param name="questionContext">The question ViewModel for the task.</param>
         public TaskPageViewModel( BaseQuestionViewModel questionContext){
 
             rightAnswersCount = 0;
@@ -53,25 +56,43 @@ namespace Echolalia.ViewModels.Tasks
             ShowAnswerCmd = new Command(ShowAnswer);
             SubmitAnswerCmd = new Command(SubmitAnswer);
 
-            GenerateContext();
+            // Generate the context for the task, which may involve generating random questions
+            _ = GenerateContext(); // The underscore is used to discard the task, as it is run asynchronously
         }
 
-        // Updates the title showing the count of questions
+        /// <summary>
+        /// Updates the title showing the count of questions.
+        /// </summary>s
         void UpdateTitle()
         {
             this.Title = QuestionContext.GetCurrentQuestionNumber().ToString() + " / " +
                          QuestionContext.GetQuestionCount().ToString();
         }
 
-        async void GenerateContext()
+        /// <summary>
+        /// Generates the context for the task by generating random questions.
+        /// You can override this method in child classes if needed.
+        /// </summary>
+        public virtual async Task GenerateContext()
         {
             await QuestionContext.GenerateRandomQuestions();
-            // Generates random answer if necessary
-            await GenerateRandomAnswers();
             UpdateTitle();
         }
 
-        // From answered view to submit answer view and and on the contrary.
+        /// <summary>
+        /// Creates the next question in the task.
+        /// You can override this method in child classes if needed.
+        /// </summary>
+        public virtual void CreateNextQuestion()
+        {
+            QuestionContext.NextQuestion();
+            UpdateControlls();
+            UpdateTitle();
+        }
+
+        /// <summary>
+        /// Updates the visibility controls for submitting and showing answers.
+        /// </summary>
         protected void UpdateControlls()
         {
             IsVisibleSubmitAnswerBtn = IsVisibleShowAnswerBtn;
@@ -79,7 +100,9 @@ namespace Echolalia.ViewModels.Tasks
             IsVisibleAnswers = IsVisibleShowAnswerBtn;
         }
 
-        // Submit one answered question
+        /// <summary>
+        /// Submits the user's answer for the current question.
+        /// </summary>
         public async void SubmitAnswer()
         {
             Word currentQuestionWord = QuestionContext.GetCurrentQuestionWord();
@@ -101,18 +124,17 @@ namespace Echolalia.ViewModels.Tasks
 
             if (QuestionContext.GetCurrentQuestionNumber() == QuestionContext.GetQuestionCount())
             {
-                SubmitResult();
+                FinishTask();
                 return;
             }
 
-            QuestionContext.NextQuestion();
-            await GenerateRandomAnswers();
-            UpdateControlls();
-            UpdateTitle();
+            CreateNextQuestion();
         }
 
-        // Submit all answered question
-        async void SubmitResult()
+        /// <summary>
+        /// Finishes the task and shows the results.
+        /// </summary>
+        async void FinishTask()
         {
             await Shell.Current.Navigation.PushAsync(new ResultsPage(
                 rightAnswersCount,
@@ -120,7 +142,9 @@ namespace Echolalia.ViewModels.Tasks
             );
         }
 
-        // Checks user answers and you can rewrite it in child classes
+        /// <summary>
+        /// Checks the user's answer and shows the correct answer.
+        /// </summary>
         public void CheckAnswer(string userAnswer)
         {
             UserAnswer = userAnswer;
@@ -129,7 +153,9 @@ namespace Echolalia.ViewModels.Tasks
             UpdateControlls();
         }
 
-        // Implements show button action
+        /// <summary>
+        /// Implements the show answer button action.
+        /// </summary>
         public virtual void ShowAnswer()
         {
             QuestionContext.ShowAnswer();

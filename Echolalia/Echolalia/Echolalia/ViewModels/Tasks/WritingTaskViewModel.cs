@@ -4,6 +4,10 @@ using Xamarin.Forms;
 
 namespace Echolalia.ViewModels.Tasks
 {
+    /// <summary>
+    /// ViewModel for managing the writing task in the application.
+    /// The writing task allows users to submit their written answers for evaluation.
+    /// </summary>
 	public class WritingTaskViewModel : TaskPageViewModel
 	{
         public Command SubmitEntry { get; }
@@ -15,7 +19,10 @@ namespace Echolalia.ViewModels.Tasks
             set => SetProperty(ref _entryAnswerText, value);
         }
 
-
+        /// <summary>
+        /// Initializes a new instance of the WritingTaskViewModel class.
+        /// </summary>
+        /// <param name="questionContext">The question ViewModel for the writing task.</param>
         public WritingTaskViewModel(BaseQuestionViewModel questionContext) : base(questionContext)
         {
             SubmitEntry = new Command(PerformSubmitEntry);
@@ -28,11 +35,6 @@ namespace Echolalia.ViewModels.Tasks
                 CheckAnswer(EntryUserAnswer);
                 EntryUserAnswer = "";
             }
-        }
-
-        public override Task GenerateRandomAnswers()
-        {
-            return Task.CompletedTask;
         }
     }
 }

@@ -14,6 +14,9 @@ namespace Echolalia.ViewModels
          * It is a collection class that provides notifications whenever items 
          * are added, removed, or when the collection is refreshed.
          */
+        /// <summary>
+        /// ObservableCollection of Word to store the translations in the dictionary.
+        /// </summary>
         public ObservableCollection<Word> Translations {get; set;}
 
         public Command RefreshCmdAsync { get; }
@@ -27,7 +30,7 @@ namespace Echolalia.ViewModels
             set => SetProperty(ref _wordCount, value);
         }
 
-        // Shows if it is Refreshing
+        // Indicates if the dictionary is currently being refreshed.
         bool _isBusy;
         public bool IsBusy
         {

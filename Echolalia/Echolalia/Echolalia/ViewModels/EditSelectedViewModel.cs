@@ -3,8 +3,14 @@ using Xamarin.Forms;
 
 namespace Echolalia.ViewModels
 {
+    /// <summary>
+    /// ViewModel for editing a selected word.
+    /// </summary>
     public class EditSelectedViewModel : BaseViewModel
     {
+        /*
+         *  Propetries for binding
+         */
         private Color flipIsFavoriteColor;
         public Color FlipIsFavoriteColor {
             get => flipIsFavoriteColor;
@@ -27,6 +33,10 @@ namespace Echolalia.ViewModels
         readonly Color blue = Color.FromHex("2196F3");
         Word currentWord;
 
+        /// <summary>
+        /// Initializes a new instance of the EditSelectedViewModel class.
+        /// </summary>
+        /// <param name="word">The word to be edited.</param>
         public EditSelectedViewModel(Word word)
         {
             Title = "Edit word";
@@ -34,6 +44,7 @@ namespace Echolalia.ViewModels
             EntryOriginalWord = word.Original;
             EntryTranslationWord = word.Translation;
 
+            // Set the initial color and label based on the word properties
             if (word.IsFavorite)
                 FlipIsFavoriteColor = yellow;
             else
@@ -44,6 +55,7 @@ namespace Echolalia.ViewModels
             else
                 MarkAsLearnedLabel = "Mark as learned";
 
+            // Initialize commands for actions
             SaveWordCMD = new Command(() => SaveWord());
             MarkAsLearnedCMD = new Command(() => MarkAsLearned());
             FlipIsFavoriteCMD = new Command(() => FlipIsFavorite());
@@ -62,6 +74,7 @@ namespace Echolalia.ViewModels
                 return;
             }
 
+            // Update the word properties with edited values
             currentWord.Original = EntryOriginalWord.Trim();
             currentWord.Translation = EntryTranslationWord.Trim();
             await App.localDB.EditItemAsync(currentWord);
@@ -88,12 +101,12 @@ namespace Echolalia.ViewModels
 
         private async void FlipIsFavorite()
         {
+            // Flip the favorite status of the word
             currentWord.IsFavorite = !currentWord.IsFavorite;
-            // if word is favorite notMark = "" else "not"
             string notMark = currentWord.IsFavorite ? "" : "not";
             FlipIsFavoriteColor = currentWord.IsFavorite ? yellow : blue;
             await Shell.Current.DisplayAlert("Echolaia",
-                    $"Word marked as {notMark} Favorite",
+                    $"Word marked as {notMark} favorite",
                     "Ok"
             );
         }

@@ -1,10 +1,11 @@
-﻿using System;
-using Echolalia.Models;
+﻿using Echolalia.Models;
 using Xamarin.Forms;
-using System.Threading.Tasks;
 
 namespace Echolalia.ViewModels
-{
+{ 
+    /// <summary>
+    /// ViewModel for managing the process of adding words to the dictionary in the application.
+    /// </summary>
     public class AddViewModel : BaseViewModel
     {
         string _originalWord;
@@ -46,6 +47,8 @@ namespace Echolalia.ViewModels
                 IsAddedByUser = true,
                 IsFavorite = false
             });
+
+            // Clear the input fields after adding the word
             EntryOriginalWord = null;
             EntryTranslationWord = null;
         }

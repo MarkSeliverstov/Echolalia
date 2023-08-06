@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 
 namespace Echolalia.ViewModels.Tasks
 {
+    /// <summary>
+    /// ViewModel for managing the choosing task page.
+    /// </summary>
     public class ChoosingTaskViewModel : TaskPageViewModel
     {
         private List<Word> answersPool;
-
         private int BtnsCount = 4;
         List<string> buttonsTextList;
+
         public List<string> ButtonsTextList
         {
             get => buttonsTextList;
@@ -22,22 +25,40 @@ namespace Echolalia.ViewModels.Tasks
 
         public Command AnswerCmd { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the ChoosingTaskViewModel class.
+        /// </summary>
+        /// <param name="questionContext">The question ViewModel for the choosing task.</param>
         public ChoosingTaskViewModel(BaseQuestionViewModel questionContext) : base(questionContext)
         {
             AnswerCmd = new Command(PerformAnswerCmd);
             ButtonsTextList = new List<string>(BtnsCount);
         }
 
-        public override async Task GenerateRandomAnswers()
+        // Overrides the GenerateContext method to generate random answers for the choosing task.
+        public override async Task GenerateContext()
+        {
+            await base.GenerateContext();
+            await GenerateRandomAnswers();
+        }
+
+        // Overrides the CreateNextQuestion method to generate random answers for the next question.
+        public override async void CreateNextQuestion()
+        {
+            base.CreateNextQuestion();
+            await GenerateRandomAnswers();
+        }
+
+        /// <summary>
+        /// Generates random answers for the choosing task.
+        /// </summary>
+        public async Task GenerateRandomAnswers()
         {
             ButtonsTextList.Clear();
             List<string> result = new();
 
             var response = await App.localDB.GetItemsAsync();
             answersPool = response.Where((item) => item.Original != QuestionContext.Answer).ToList();
-            // Deleting right answer word from answersPool
-            //Item answerWord = answersPool.Where((word) => word.Translation == QuestionContext.Answer).First();
-            //answersPool.Remove(answerWord);
 
             Random rnd = new Random();
             int rndIndexOfRightAnswer = rnd.Next(BtnsCount);
@@ -72,6 +93,10 @@ namespace Echolalia.ViewModels.Tasks
             ButtonsTextList = result;
         }
 
+        /// <summary>
+        /// Executes when the user selects an answer and checks the answer.
+        /// </summary>
+        /// <param name="userAnswer">The button that was clicked</param>
         private void PerformAnswerCmd(object userAnswer)
         {
             CheckAnswer(userAnswer.ToString());

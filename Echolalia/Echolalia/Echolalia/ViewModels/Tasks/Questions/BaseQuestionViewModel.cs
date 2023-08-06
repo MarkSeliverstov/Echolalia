@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Echolalia.Models;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Echolalia.Views.Tasks;
 
 namespace Echolalia.ViewModels.Tasks.Questions
 {
-	public abstract class BaseQuestionViewModel: BaseViewModel
+    /// <summary>
+    /// Abstract base ViewModel for managing question-related tasks.
+    /// </summary>
+    public abstract class BaseQuestionViewModel: BaseViewModel
     {
         public abstract Task<List<Word>> GetListForGeneratingQuestion();
 
@@ -72,6 +74,10 @@ namespace Echolalia.ViewModels.Tasks.Questions
         public int GetCurrentQuestionNumber() => currentQuestionIndex + 1;
         public int GetQuestionCount() => questionCount;
 
+        /// <summary>
+        /// Generate random questions from the list of words.
+        /// </summary>
+        /// <returns></returns>
         public async Task GenerateRandomQuestions()
         {
             List<Word> from = await GetListForGeneratingQuestion();
@@ -111,12 +117,18 @@ namespace Echolalia.ViewModels.Tasks.Questions
             ChangeQuestionAndAnswer();
         }
 
+        /// <summary>
+        /// Show the answer with the provided color (for checking if the answer is correct or not).
+        /// </summary>
         public void ShowAnswer(bool isCorrect)
         {
             AnswerColor = isCorrect ? greenColor : redColor;
             IsVisibleAnswer = true;
         }
 
+        /// <summary>
+        /// Show the answer without checking correctness (e.g., when the user clicks the "Show Answer" button).
+        /// </summary>
         public void ShowAnswer()
         {
             AnswerColor = yellowColor;
