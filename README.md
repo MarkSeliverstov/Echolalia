@@ -4,7 +4,7 @@
 - [Mockups](https://www.figma.com/file/lT8dzaokxH0heS61JDuYgs/Echolalia?type=design&node-id=0-1&mode=design&t=WjyKi2lYgFPngbiv-0) in Figma
 - [Actual screens](./src/screens/)
 - [Specification](Specification.pdf)
-- [Documentation](Specification.pdf)
+- [Documentation](Documentation.pdf)
 
 ## Getting Started
 Echolalia is available for both Android and iOS devices. To install the application
